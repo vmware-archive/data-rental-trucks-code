@@ -1,3 +1,5 @@
 rootProject.name = 'rental-trucks'
 
 include 'app'
+
+enableFeaturePreview('IMPROVED_POM_SUPPORT')
