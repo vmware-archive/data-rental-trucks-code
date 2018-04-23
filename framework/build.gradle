@@ -1,0 +1,15 @@
+apply plugin: 'java-library'
+apply plugin: 'org.springframework.boot'
+
+bootRepackage.enabled = false
+
+dependencies {
+    implementation('org.springframework.kafka:spring-kafka')
+    implementation('org.slf4j:slf4j-api')
+
+    runtimeOnly('ch.qos.logback:logback-classic')
+
+    testImplementation('junit:junit')
+    testImplementation('org.assertj:assertj-core')
+    testImplementation("org.awaitility:awaitility:${awaitilityVersion}")
+}

@@ -1,5 +1,6 @@
 rootProject.name = 'rental-trucks'
 
-include 'app'
+include 'framework',
+        'app'
 
 enableFeaturePreview('IMPROVED_POM_SUPPORT')
