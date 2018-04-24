@@ -79,6 +79,40 @@ public class Reservation {
         this.customerName = customerName;
     }
 
+
+    ////////////////////////
+
+
+    public void finalizeMe() {
+        // poor man's state machine
+        if (!status.equals("REQUESTED")) {
+            throw new IllegalStateException("Reservation must be REQUESTED in order to FINALIZE");
+        }
+
+        status = "CONFIRMED";
+    }
+
+    // initiated by system
+    public void failed() {
+        // depending on the reservation state, may need to adjust the trucks on hand
+        // update the status failed
+    }
+
+    // initiated by user
+    public void cancel() {
+        // depending on the reservation state, may need to adjust the trucks on hand
+        // update the status to canceled
+    }
+
+    public Rental convertToRental(/* some additional data needed */) {
+
+        // if its hard, could collaborate with rental factory
+        //
+        // Q: how does this collaborate with CQRS sub-system??
+
+        return null;
+    }
+
     ////////////////////////
 
     @Override

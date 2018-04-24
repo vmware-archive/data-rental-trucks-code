@@ -29,7 +29,7 @@ public class SaveReservationEventSubscriber implements AsyncEventHandler<Reserva
                 data.getConfirmationNumber()
         );
 
-        Reservation reservation = reservationManager.requestReservation(reservationRequest);
+        Reservation reservation = reservationManager.createReservation(reservationRequest);
 
         repository.save(reservation);
     }
