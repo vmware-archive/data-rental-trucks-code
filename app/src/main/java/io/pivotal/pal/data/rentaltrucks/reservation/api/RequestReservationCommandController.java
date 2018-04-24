@@ -4,6 +4,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class RequestReservationCommandController {
@@ -15,10 +20,21 @@ public class RequestReservationCommandController {
     }
 
     @PostMapping("/reservations-requests")
-    public ResponseEntity<Void> rentTruck(@RequestBody RequestReservationCommandDto commandDto) {
+    public ResponseEntity<Void> rentTruck(@RequestBody RequestReservationCommandDto commandDto,
+                                          UriComponentsBuilder uriComponentsBuilder) {
 
-        service.rentTruck(commandDto);
+        String confirmationNumber = service.rentTruck(commandDto);
 
-        return ResponseEntity.ok().build(); // NOT OK!
+        Map<String, String> uriVariables = new HashMap<>();
+        uriVariables.put("confirmationNumber", confirmationNumber);
+
+        URI locationUri = uriComponentsBuilder
+                .path("/reservations/{confirmationNumber}")
+                .buildAndExpand(uriVariables)
+                .toUri();
+
+        return ResponseEntity.accepted()
+                .location(locationUri)
+                .build();
     }
 }
