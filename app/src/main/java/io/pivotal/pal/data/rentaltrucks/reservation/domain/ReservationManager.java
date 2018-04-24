@@ -5,32 +5,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReservationManager {
 
-    private final ReservationRepository repository;
-    private final ConfirmationNumberFactory factory;
+    public Reservation requestReservation(ReservationRequest reservationRequest) {
 
-    public ReservationManager(ReservationRepository repository, ConfirmationNumberFactory factory) {
-        this.repository = repository;
-        this.factory = factory;
-    }
+        // could be validation here
+        // or does reservation manager check for inventory here?
 
-    public String requestReservation(ReservationRequest reservationRequest) {
-
-        // generate a confirmation number
-        String confirmationNumber = factory.make();
-
-        // new up a res
+        // new up a reservation
         Reservation reservation = new Reservation(
-                confirmationNumber,
+                reservationRequest.getConfirmationNumber(),
                 "REQUESTED",
                 reservationRequest.getPickupDate(),
                 reservationRequest.getDropoffDate(),
                 reservationRequest.getCustomerName()
         );
 
-        // persist ???
-        repository.save(reservation);
-
-        return confirmationNumber;
+        return reservation;
     }
-
 }

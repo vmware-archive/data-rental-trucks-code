@@ -8,11 +8,13 @@ public class ReservationRequest {
     private final LocalDate pickupDate;
     private final LocalDate dropoffDate;
     private final String customerName;
+    private final String confirmationNumber;
 
-    public ReservationRequest(LocalDate pickupDate, LocalDate dropoffDate, String customerName) {
+    public ReservationRequest(LocalDate pickupDate, LocalDate dropoffDate, String customerName, String confirmationNumber) {
         this.pickupDate = pickupDate;
         this.dropoffDate = dropoffDate;
         this.customerName = customerName;
+        this.confirmationNumber = confirmationNumber;
     }
 
     public LocalDate getPickupDate() {
@@ -27,6 +29,10 @@ public class ReservationRequest {
         return customerName;
     }
 
+    public String getConfirmationNumber() {
+        return confirmationNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -34,20 +40,22 @@ public class ReservationRequest {
         ReservationRequest that = (ReservationRequest) o;
         return Objects.equals(pickupDate, that.pickupDate) &&
                 Objects.equals(dropoffDate, that.dropoffDate) &&
-                Objects.equals(customerName, that.customerName);
+                Objects.equals(customerName, that.customerName) &&
+                Objects.equals(confirmationNumber, that.confirmationNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pickupDate, dropoffDate, customerName);
+        return Objects.hash(pickupDate, dropoffDate, customerName, confirmationNumber);
     }
 
     @Override
     public String toString() {
         return "ReservationRequest{" +
-                "pickupDate='" + pickupDate + '\'' +
-                ", dropoffDate='" + dropoffDate + '\'' +
+                "pickupDate=" + pickupDate +
+                ", dropoffDate=" + dropoffDate +
                 ", customerName='" + customerName + '\'' +
+                ", confirmationNumber='" + confirmationNumber + '\'' +
                 '}';
     }
 
