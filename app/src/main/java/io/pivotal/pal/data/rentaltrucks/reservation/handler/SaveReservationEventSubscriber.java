@@ -2,9 +2,7 @@ package io.pivotal.pal.data.rentaltrucks.reservation.handler;
 
 import io.pivotal.pal.data.rentaltruck.framework.event.AsyncEventHandler;
 import io.pivotal.pal.data.rentaltrucks.event.ReservationRequestedEvent;
-import io.pivotal.pal.data.rentaltrucks.reservation.domain.Reservation;
 import io.pivotal.pal.data.rentaltrucks.reservation.domain.ReservationManager;
-import io.pivotal.pal.data.rentaltrucks.reservation.domain.ReservationRepository;
 import io.pivotal.pal.data.rentaltrucks.reservation.domain.ReservationRequest;
 import org.springframework.stereotype.Component;
 

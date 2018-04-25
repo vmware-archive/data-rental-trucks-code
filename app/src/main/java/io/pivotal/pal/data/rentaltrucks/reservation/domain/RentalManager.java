@@ -13,21 +13,21 @@ public class RentalManager {
         this.rentalRepository = rentalRepository;
     }
 
-    // returns confirmationNumber to identify Rental
-    public String convertToRental(Reservation reservation, Integer pickupMileage) {
+    public Rental pickupReservedTruck(Reservation reservation, Truck truck) {
         Rental rental = new Rental(
                 reservation.getConfirmationNumber(),
                 "PICKED_UP",
+                truck.getVin(),
                 reservation.getStartDate(),
                 reservation.getEndDate(),
                 null,
                 reservation.getCustomerName(),
-                pickupMileage,
+                truck.getMileage(),
                 null
         );
-        rentalRepository.save(rental);
+        Rental savedRental = rentalRepository.save(rental);
 
-        return reservation.getConfirmationNumber();
+        return savedRental;
     }
 
     public void dropoffRental(Rental rental, LocalDate dropoffDate, Integer dropoffMileage) {

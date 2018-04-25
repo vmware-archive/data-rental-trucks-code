@@ -2,10 +2,7 @@ package io.pivotal.pal.data.rentaltrucks.reservation.config;
 
 import io.pivotal.pal.data.rentaltruck.framework.event.AsyncEventPublisher;
 import io.pivotal.pal.data.rentaltruck.framework.event.DefaultAsyncEventPublisher;
-import io.pivotal.pal.data.rentaltrucks.event.ReservationInitializedEvent;
-import io.pivotal.pal.data.rentaltrucks.event.ReservationRequestedEvent;
-import io.pivotal.pal.data.rentaltrucks.event.TruckAvailableEvent;
-import io.pivotal.pal.data.rentaltrucks.event.TruckNotAvailableEvent;
+import io.pivotal.pal.data.rentaltrucks.event.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -30,5 +27,10 @@ public class EventPublisherConfig {
     @Bean
     public AsyncEventPublisher<TruckNotAvailableEvent> truckNotAvailableEventPublisher() {
         return new DefaultAsyncEventPublisher<>("truck-not-available");
+    }
+
+    @Bean
+    public AsyncEventPublisher<TruckPickedUpEvent> truckPickUpEventAsyncEventPublisher() {
+        return new DefaultAsyncEventPublisher<>("truck-pick-up");
     }
 }

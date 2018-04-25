@@ -1,10 +1,8 @@
 package io.pivotal.pal.data.rentaltrucks.reservation.config;
 
-import io.pivotal.pal.data.rentaltruck.framework.event.AsyncEventHandler;
 import io.pivotal.pal.data.rentaltruck.framework.event.AsyncEventSubscriberAdapter;
-import io.pivotal.pal.data.rentaltrucks.event.ReservationInitializedEvent;
-import io.pivotal.pal.data.rentaltrucks.event.ReservationRequestedEvent;
-import io.pivotal.pal.data.rentaltrucks.event.TruckAvailableEvent;
+import io.pivotal.pal.data.rentaltrucks.event.*;
+import io.pivotal.pal.data.rentaltrucks.reservation.handler.CompletePickupSubscriber;
 import io.pivotal.pal.data.rentaltrucks.reservation.handler.FinalizeReservationEventSubscriber;
 import io.pivotal.pal.data.rentaltrucks.reservation.handler.SaveReservationEventSubscriber;
 import io.pivotal.pal.data.rentaltrucks.reservation.handler.TruckAvailabilityEventSubscriber;
@@ -27,5 +25,10 @@ public class SubscriberAdapterConfig {
     @Bean
     public AsyncEventSubscriberAdapter<TruckAvailableEvent> finalizeReservationSubscriberAdapter(FinalizeReservationEventSubscriber subscriber) {
         return new AsyncEventSubscriberAdapter<>("truck-available", subscriber);
+    }
+
+    @Bean
+    public AsyncEventSubscriberAdapter<TruckPickedUpEvent> completePickUpEventSubscriber(CompletePickupSubscriber subscriber) {
+        return new AsyncEventSubscriberAdapter<>("truck-pick-up", subscriber);
     }
 }
