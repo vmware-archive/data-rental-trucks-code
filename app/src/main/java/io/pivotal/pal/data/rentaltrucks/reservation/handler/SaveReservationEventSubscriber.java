@@ -12,11 +12,9 @@ import org.springframework.stereotype.Component;
 public class SaveReservationEventSubscriber implements AsyncEventHandler<ReservationRequestedEvent> {
 
     private final ReservationManager reservationManager;
-    private final ReservationRepository repository;
 
-    public SaveReservationEventSubscriber(ReservationManager reservationManager, ReservationRepository repository) {
+    public SaveReservationEventSubscriber(ReservationManager reservationManager) {
         this.reservationManager = reservationManager;
-        this.repository = repository;
     }
 
     @Override
@@ -29,8 +27,6 @@ public class SaveReservationEventSubscriber implements AsyncEventHandler<Reserva
                 data.getConfirmationNumber()
         );
 
-        Reservation reservation = reservationManager.createReservation(reservationRequest);
-
-        repository.save(reservation);
+        reservationManager.createReservation(reservationRequest);
     }
 }
