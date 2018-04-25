@@ -4,20 +4,15 @@ import io.pivotal.pal.data.rentaltruck.framework.event.AsyncEventPublisher;
 import io.pivotal.pal.data.rentaltrucks.event.ReservationInitializedEvent;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
-
 @Component
 public class ReservationManager {
 
     private final ReservationRepository reservationRepository;
-    private final RentalRepository rentalRepository;
     private final AsyncEventPublisher<ReservationInitializedEvent> eventPublisher;
 
     public ReservationManager(ReservationRepository reservationRepository,
-                              RentalRepository rentalRepository,
                               AsyncEventPublisher<ReservationInitializedEvent> eventPublisher) {
         this.reservationRepository = reservationRepository;
-        this.rentalRepository = rentalRepository;
         this.eventPublisher = eventPublisher;
     }
 
@@ -69,27 +64,4 @@ public class ReservationManager {
         reservationRepository.save(reservation);
     }
 
-    // returns confirmationNumber to identify Rental
-    public String convertToRental(Reservation reservation, Integer pickupMileage) {
-        Rental rental = new Rental(
-                reservation.getConfirmationNumber(),
-                "PICKED_UP",
-                reservation.getStartDate(),
-                reservation.getEndDate(),
-                null,
-                reservation.getCustomerName(),
-                pickupMileage,
-                null
-        );
-        rentalRepository.save(rental);
-
-        return reservation.getConfirmationNumber();
-    }
-
-    public void dropoffRental(Rental rental, LocalDate dropoffDate, Integer dropoffMileage) {
-        rental.dropoff(dropoffDate, dropoffMileage);
-        rentalRepository.save(rental);
-
-        // send dropoff receipt
-    }
 }
