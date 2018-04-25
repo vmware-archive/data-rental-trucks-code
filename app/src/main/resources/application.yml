@@ -11,3 +11,17 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
+    database: hsql
+
+---
+
+spring:
+  profiles: postgresql
+  datasource:
+    url: jdbc:postgresql://localhost/rentaltrucks
+    username: dwadden
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database: postgresql

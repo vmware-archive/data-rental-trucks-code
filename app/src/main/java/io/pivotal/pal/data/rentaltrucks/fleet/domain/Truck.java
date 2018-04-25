@@ -1,13 +1,11 @@
-package io.pivotal.pal.data.rentaltrucks.reservation.domain;
+package io.pivotal.pal.data.rentaltrucks.fleet.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
-@Entity(name = "ReservationTruck")
-@Table(name = "reservation_truck")
+@Entity(name = "fleet_truck")
+@Table(name = "fleet_truck")
 public class Truck {
 
     @Id
@@ -20,16 +18,25 @@ public class Truck {
     @Column(name = "mileage")
     private Integer mileage;
 
-    public Truck(String vin, String status, Integer mileage) {
+    @OneToMany(
+            mappedBy = "truck",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<MaintenenceHistory> maintenanceHistories;
+
+    public Truck(String vin, String status, Integer mileage, Set<MaintenenceHistory> maintenenceHistories) {
         this.vin = vin;
         this.status = status;
         this.mileage = mileage;
+        this.maintenanceHistories = maintenenceHistories;
     }
 
     private Truck() {
         this.vin = null;
         this.status = null;
         this.mileage = null;
+        this.maintenanceHistories = null;
     }
 
     public String getVin() {
@@ -52,17 +59,28 @@ public class Truck {
         this.mileage = mileage;
     }
 
+    public Set<MaintenenceHistory> getMaintenanceHistories() {
+        return maintenanceHistories;
+    }
+
+    public void setMaintenanceHistories(Set<MaintenenceHistory> maintenanceHistories) {
+        this.maintenanceHistories = maintenanceHistories;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Truck truck = (Truck) o;
-        return Objects.equals(vin, truck.vin);
+        return Objects.equals(vin, truck.vin) &&
+                Objects.equals(status, truck.status) &&
+                Objects.equals(mileage, truck.mileage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(vin);
+
+        return Objects.hash(vin, status, mileage);
     }
 
     @Override

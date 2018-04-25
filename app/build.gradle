@@ -7,8 +7,10 @@ dependencies {
     implementation('com.fasterxml.jackson.module:jackson-module-parameter-names')
     implementation('com.fasterxml.jackson.datatype:jackson-datatype-jdk8')
     implementation('com.fasterxml.jackson.datatype:jackson-datatype-jsr310')
+    implementation('org.hibernate:hibernate-java8')
 
     runtimeOnly('org.hsqldb:hsqldb')
+    runtimeOnly('org.postgresql:postgresql')
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
 
     testImplementation('org.springframework.boot:spring-boot-starter-test')
