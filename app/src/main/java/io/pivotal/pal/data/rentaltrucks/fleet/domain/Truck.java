@@ -92,6 +92,14 @@ public class Truck {
         maintenanceHistories.add(maintenenceHistory);
     }
 
+    public void returnFromMaintenance(LocalDate endDate) {
+        // update the status on truck to AVAILABLE
+        status = "AVAILABLE";
+
+        // update the histories accordingly
+        maintenanceHistories.forEach(mh -> mh.setEndDate(endDate)); // FIXME needs more thought
+    }
+
     ////////////////////////
 
     @Override

@@ -1,10 +1,14 @@
 package io.pivotal.pal.data.rentaltrucks.fleet.config;
 
 import io.pivotal.pal.data.rentaltruck.framework.event.AsyncEventSubscriberAdapter;
-import io.pivotal.pal.data.rentaltrucks.event.*;
+import io.pivotal.pal.data.rentaltrucks.event.TruckDroppedOffEvent;
+import io.pivotal.pal.data.rentaltrucks.event.TruckEnteredMaintenanceEvent;
+import io.pivotal.pal.data.rentaltrucks.event.TruckPickedUpEvent;
+import io.pivotal.pal.data.rentaltrucks.fleet.command.TruckReturnedFromMaintenanceEvent;
 import io.pivotal.pal.data.rentaltrucks.fleet.handler.ReturnTruckToYardHandler;
+import io.pivotal.pal.data.rentaltrucks.fleet.handler.TruckEnteredMaintenanceHandler;
+import io.pivotal.pal.data.rentaltrucks.fleet.handler.TruckReturnedFromMaintenanceHandler;
 import io.pivotal.pal.data.rentaltrucks.fleet.handler.WithdrawTruckFromYardHandler;
-import io.pivotal.pal.data.rentaltrucks.reservation.handler.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,6 +27,11 @@ public class SubscriberAdapterConfig {
 
     @Bean
     public AsyncEventSubscriberAdapter<TruckEnteredMaintenanceEvent> truckEnteredMaintenanceSubscriberAdapter(TruckEnteredMaintenanceHandler handler) {
+        return new AsyncEventSubscriberAdapter<>("truck-entered-maintenance", handler);
+    }
+
+    @Bean
+    public AsyncEventSubscriberAdapter<TruckReturnedFromMaintenanceEvent> truckReturnedFromMaintenanceSubscriberAdapter(TruckReturnedFromMaintenanceHandler handler) {
         return new AsyncEventSubscriberAdapter<>("truck-entered-maintenance", handler);
     }
 }
