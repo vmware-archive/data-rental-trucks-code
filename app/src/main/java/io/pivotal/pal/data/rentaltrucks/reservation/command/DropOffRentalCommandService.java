@@ -15,9 +15,11 @@ public class DropOffRentalCommandService {
 
     public void dropOffRental(DropOffRentalCommandDto commandDto) {
 
+        // TODO: Do we need the truck VIN from the command DTO or can we derive it here?
+
         // emit truck dropped off event
         TruckDroppedOffEvent event =
-                new TruckDroppedOffEvent(commandDto.getConfirmationNumber(), commandDto.getDropOffMileage());
+                new TruckDroppedOffEvent(commandDto.getConfirmationNumber(), commandDto.getTruckVin(), commandDto.getDropOffMileage());
         eventPublisher.publish(event);
     }
 

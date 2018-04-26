@@ -26,6 +26,8 @@ public class Truck {
     )
     private Set<MaintenenceHistory> maintenanceHistories = new LinkedHashSet<>();
 
+    // TODO: What about a rentalCounter "number of rentals" (since last maintenance?)
+
     public Truck(String vin, String status, Integer mileage) {
         this.vin = vin;
         this.status = status;
@@ -59,6 +61,19 @@ public class Truck {
     public Set<MaintenenceHistory> getMaintenanceHistories() {
         return maintenanceHistories;
     }
+
+    ////////////////////////
+
+    public void withdrawFromYard() {
+        status = "OUT_OF_YARD";
+    }
+
+    public void returnToYard(Integer dropOffMileage) {
+        status = "AVAILABLE";
+        mileage = dropOffMileage;
+    }
+
+    ////////////////////////
 
     @Override
     public boolean equals(Object o) {
