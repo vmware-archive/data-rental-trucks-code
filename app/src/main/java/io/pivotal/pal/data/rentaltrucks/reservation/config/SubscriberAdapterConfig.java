@@ -3,7 +3,7 @@ package io.pivotal.pal.data.rentaltrucks.reservation.config;
 import io.pivotal.pal.data.rentaltruck.framework.event.AsyncEventSubscriberAdapter;
 import io.pivotal.pal.data.rentaltrucks.event.*;
 import io.pivotal.pal.data.rentaltrucks.reservation.handler.CompletePickupSubscriber;
-import io.pivotal.pal.data.rentaltrucks.reservation.handler.FinalizeReservationEventSubscriber;
+import io.pivotal.pal.data.rentaltrucks.reservation.handler.FinalizeConfirmationEventSubscriber;
 import io.pivotal.pal.data.rentaltrucks.reservation.handler.SaveReservationEventSubscriber;
 import io.pivotal.pal.data.rentaltrucks.reservation.handler.TruckAvailabilityEventSubscriber;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +23,7 @@ public class SubscriberAdapterConfig {
     }
 
     @Bean
-    public AsyncEventSubscriberAdapter<TruckAvailableEvent> finalizeReservationSubscriberAdapter(FinalizeReservationEventSubscriber subscriber) {
+    public AsyncEventSubscriberAdapter<TruckAvailableEvent> finalizeReservationSubscriberAdapter(FinalizeConfirmationEventSubscriber subscriber) {
         return new AsyncEventSubscriberAdapter<>("truck-available", subscriber);
     }
 

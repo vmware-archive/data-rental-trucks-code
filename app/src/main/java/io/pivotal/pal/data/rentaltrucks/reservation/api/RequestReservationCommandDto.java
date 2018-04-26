@@ -1,5 +1,8 @@
 package io.pivotal.pal.data.rentaltrucks.reservation.api;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class RequestReservationCommandDto {
@@ -8,7 +11,10 @@ public class RequestReservationCommandDto {
     private final String dropoffDate;
     private final String customerName;
 
-    public RequestReservationCommandDto(String pickupDate, String dropoffDate, String customerName) {
+    @JsonCreator
+    public RequestReservationCommandDto(@JsonProperty("pickupDate") String pickupDate,
+                                        @JsonProperty("dropoffDate") String dropoffDate,
+                                        @JsonProperty("customerName") String customerName) {
         this.pickupDate = pickupDate;
         this.dropoffDate = dropoffDate;
         this.customerName = customerName;

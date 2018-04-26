@@ -67,14 +67,13 @@ public class Reservation {
 
     ////////////////////////
 
-
     public void finalizeConfirmation() {
         // poor man's state machine
         if (!status.equals("REQUESTED")) {
             throw new IllegalStateException("Reservation must be REQUESTED in order to FINALIZE");
         }
 
-        status = "CONFIRMED";
+        status = "FINALIZED";
     }
 
     // initiated by system
