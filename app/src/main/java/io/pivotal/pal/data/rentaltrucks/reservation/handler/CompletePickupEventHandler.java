@@ -20,11 +20,24 @@ public class CompletePickupEventHandler implements AsyncEventHandler<TruckPicked
 
     @Override
     public void onEvent(TruckPickedUpEvent data) {
+        // rehydrate a reservation from confirmation number
         Reservation reservation = reservationRepository.findOne(data.getConfirmationNumber());
 
-        Truck truck = truckRepository.findOne(data.getTruckId());
+        // TODO: revisit consistency between the following operations:
+        // - update status on reservation
+        // - update status on truck
+        // - creating the rental
 
+        // update truck to RENTED status
+        Truck truck = truckRepository.findOne(data.getTruckVin());
+        truck.setStatus("RENTED");
+        truckRepository.save(truck);
+
+        // update reservation to COMPLETED status
+        reservation.setStatus("COMPLETED");
+        reservationRepository.save(reservation);
+
+        // create rental in PICKED_UP status
         Rental rental = rentalManager.pickupReservedTruck(reservation, truck);
-        // do something with the rental like send another event ??
     }
 }

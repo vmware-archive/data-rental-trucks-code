@@ -20,7 +20,7 @@ public class PickUpRentalCommandService {
         //  - pickupMileage frmo truck
         //  - pickupDate from res, customername from res
 
-        TruckPickedUpEvent event = new TruckPickedUpEvent(commandDto.getConfirmationNumber(), commandDto.getTruckId());
+        TruckPickedUpEvent event = new TruckPickedUpEvent(commandDto.getConfirmationNumber(), commandDto.getTruckVin());
         eventPublisher.publish(event);
     }
 }

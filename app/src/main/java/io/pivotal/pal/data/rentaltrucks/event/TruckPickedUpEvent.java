@@ -5,21 +5,19 @@ import java.util.Objects;
 public class TruckPickedUpEvent {
 
     private final String confirmationNumber;
-    private final String truckId;
+    private final String truckVin;
 
-    // add required truck specs here in future
-
-    public TruckPickedUpEvent(String confirmationNumber, String truckId) {
+    public TruckPickedUpEvent(String confirmationNumber, String truckVin) {
         this.confirmationNumber = confirmationNumber;
-        this.truckId = truckId;
+        this.truckVin = truckVin;
     }
 
     public String getConfirmationNumber() {
         return confirmationNumber;
     }
 
-    public String getTruckId() {
-        return truckId;
+    public String getTruckVin() {
+        return truckVin;
     }
 
     @Override
@@ -28,20 +26,20 @@ public class TruckPickedUpEvent {
         if (o == null || getClass() != o.getClass()) return false;
         TruckPickedUpEvent that = (TruckPickedUpEvent) o;
         return Objects.equals(confirmationNumber, that.confirmationNumber) &&
-                Objects.equals(truckId, that.truckId);
+                Objects.equals(truckVin, that.truckVin);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(confirmationNumber, truckId);
+        return Objects.hash(confirmationNumber, truckVin);
     }
 
     @Override
     public String toString() {
         return "TruckPickedUpEvent{" +
                 "confirmationNumber='" + confirmationNumber + '\'' +
-                ", truckId='" + truckId + '\'' +
+                ", truckVin='" + truckVin + '\'' +
                 '}';
     }
 }
