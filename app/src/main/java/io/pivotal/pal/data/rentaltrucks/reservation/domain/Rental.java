@@ -18,8 +18,8 @@ public class Rental {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "truck_id")
-    private String truckId;
+    @Column(name = "truck_vin")
+    private String truckVin;
 
     @Column(name = "pickup_date")
     private LocalDate pickupDate;
@@ -43,14 +43,14 @@ public class Rental {
 
     public Rental(String confirmationNumber,
                   String status,
-                  String truckId,
+                  String truckVin,
                   LocalDate pickupDate,
                   LocalDate scheduledDropoffDate,
                   String customerName,
                   Integer pickupMileage) {
         this.confirmationNumber = confirmationNumber;
         this.status = status;
-        this.truckId = truckId;
+        this.truckVin = truckVin;
         this.pickupDate = pickupDate;
         this.scheduledDropoffDate = scheduledDropoffDate;
         this.customerName = customerName;
@@ -71,6 +71,10 @@ public class Rental {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getTruckVin() {
+        return truckVin;
     }
 
     public LocalDate getPickupDate() {
@@ -133,7 +137,7 @@ public class Rental {
         return "Rental{" +
                 "confirmationNumber='" + confirmationNumber + '\'' +
                 ", status='" + status + '\'' +
-                ", truckId='" + truckId + '\'' +
+                ", truckVin='" + truckVin + '\'' +
                 ", pickupDate=" + pickupDate +
                 ", scheduledDropoffDate=" + scheduledDropoffDate +
                 ", dropoffDate=" + dropoffDate +

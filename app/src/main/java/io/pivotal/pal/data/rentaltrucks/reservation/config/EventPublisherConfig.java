@@ -30,7 +30,12 @@ public class EventPublisherConfig {
     }
 
     @Bean
-    public AsyncEventPublisher<TruckPickedUpEvent> truckPickUpEventAsyncEventPublisher() {
-        return new DefaultAsyncEventPublisher<>("truck-pick-up");
+    public AsyncEventPublisher<TruckPickedUpEvent> truckPickedUpEventPublisher() {
+        return new DefaultAsyncEventPublisher<>("truck-picked-up");
+    }
+
+    @Bean
+    public AsyncEventPublisher<TruckDroppedOffEvent> truckDroppedOffEventPublisher() {
+        return new DefaultAsyncEventPublisher<>("truck-dropped-off");
     }
 }

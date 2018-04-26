@@ -50,6 +50,15 @@ public class Truck {
         this.mileage = mileage;
     }
 
+    ////////////////////////
+
+    public void returnToYard(Integer dropOffMileage) {
+        status = "AVAILABLE";
+        mileage = dropOffMileage;
+    }
+
+    ////////////////////////
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
