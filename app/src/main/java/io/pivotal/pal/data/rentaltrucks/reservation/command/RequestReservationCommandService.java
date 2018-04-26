@@ -1,4 +1,4 @@
-package io.pivotal.pal.data.rentaltrucks.reservation.api;
+package io.pivotal.pal.data.rentaltrucks.reservation.command;
 
 import io.pivotal.pal.data.rentaltruck.framework.event.AsyncEventPublisher;
 import io.pivotal.pal.data.rentaltrucks.event.ReservationRequestedEvent;

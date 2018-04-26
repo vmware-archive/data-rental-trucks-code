@@ -1,4 +1,4 @@
-package io.pivotal.pal.data.rentaltrucks.reservation.api;
+package io.pivotal.pal.data.rentaltrucks.reservation.command;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,4 +1,4 @@
-package io.pivotal.pal.data.rentaltrucks.reservation.api;
+package io.pivotal.pal.data.rentaltrucks.reservation.command;
 
 import java.util.Objects;
 
