@@ -7,11 +7,11 @@ import io.pivotal.pal.data.rentaltrucks.reservation.domain.ReservationRequest;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SaveReservationEventSubscriber implements AsyncEventHandler<ReservationRequestedEvent> {
+public class SaveReservationEventHandler implements AsyncEventHandler<ReservationRequestedEvent> {
 
     private final ReservationManager reservationManager;
 
-    public SaveReservationEventSubscriber(ReservationManager reservationManager) {
+    public SaveReservationEventHandler(ReservationManager reservationManager) {
         this.reservationManager = reservationManager;
     }
 

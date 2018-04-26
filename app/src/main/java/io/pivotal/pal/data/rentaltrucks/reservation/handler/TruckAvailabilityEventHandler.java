@@ -24,19 +24,19 @@ import static java.time.temporal.ChronoUnit.DAYS;
 import static java.util.stream.Collectors.toList;
 
 @Component
-public class TruckAvailabilityEventSubscriber implements AsyncEventHandler<ReservationInitializedEvent> {
+public class TruckAvailabilityEventHandler implements AsyncEventHandler<ReservationInitializedEvent> {
 
-    private static final Logger logger = LoggerFactory.getLogger(TruckAvailabilityEventSubscriber.class);
+    private static final Logger logger = LoggerFactory.getLogger(TruckAvailabilityEventHandler.class);
 
     private final AsyncEventPublisher<TruckAvailableEvent> truckAvailableEventPublisher;
     private final AsyncEventPublisher<TruckNotAvailableEvent> truckNotAvailableEventPublisher;
     private final ReservationRepository reservationRepository;
     private final TruckRepository truckRepository;
 
-    public TruckAvailabilityEventSubscriber(AsyncEventPublisher<TruckAvailableEvent> truckAvailableEventPublisher,
-                                            AsyncEventPublisher<TruckNotAvailableEvent> truckNotAvailableEventPublisher,
-                                            ReservationRepository reservationRepository,
-                                            TruckRepository truckRepository) {
+    public TruckAvailabilityEventHandler(AsyncEventPublisher<TruckAvailableEvent> truckAvailableEventPublisher,
+                                         AsyncEventPublisher<TruckNotAvailableEvent> truckNotAvailableEventPublisher,
+                                         ReservationRepository reservationRepository,
+                                         TruckRepository truckRepository) {
         this.truckAvailableEventPublisher = truckAvailableEventPublisher;
         this.truckNotAvailableEventPublisher = truckNotAvailableEventPublisher;
         this.reservationRepository = reservationRepository;

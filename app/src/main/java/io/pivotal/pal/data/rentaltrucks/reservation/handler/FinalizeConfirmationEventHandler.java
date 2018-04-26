@@ -9,13 +9,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FinalizeConfirmationEventSubscriber implements AsyncEventHandler<TruckAvailableEvent> {
+public class FinalizeConfirmationEventHandler implements AsyncEventHandler<TruckAvailableEvent> {
 
-    private static final Logger logger = LoggerFactory.getLogger(FinalizeConfirmationEventSubscriber.class);
+    private static final Logger logger = LoggerFactory.getLogger(FinalizeConfirmationEventHandler.class);
 
     private final ReservationRepository repository;
 
-    public FinalizeConfirmationEventSubscriber(ReservationRepository repository) {
+    public FinalizeConfirmationEventHandler(ReservationRepository repository) {
         this.repository = repository;
     }
 

@@ -6,13 +6,13 @@ import io.pivotal.pal.data.rentaltrucks.reservation.domain.*;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CompletePickupSubscriber implements AsyncEventHandler<TruckPickedUpEvent> {
+public class CompletePickupEventHandler implements AsyncEventHandler<TruckPickedUpEvent> {
 
     private final RentalManager rentalManager;
     private final ReservationRepository reservationRepository;
     private final TruckRepository truckRepository;
 
-    public CompletePickupSubscriber(RentalManager rentalManager, ReservationRepository reservationRepository, TruckRepository truckRepository) {
+    public CompletePickupEventHandler(RentalManager rentalManager, ReservationRepository reservationRepository, TruckRepository truckRepository) {
         this.rentalManager = rentalManager;
         this.reservationRepository = reservationRepository;
         this.truckRepository = truckRepository;

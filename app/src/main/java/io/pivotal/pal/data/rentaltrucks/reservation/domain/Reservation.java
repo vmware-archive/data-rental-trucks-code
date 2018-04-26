@@ -88,15 +88,6 @@ public class Reservation {
         // update the status to canceled
     }
 
-    public Rental convertToRental(/* some additional data needed */) {
-
-        // if its hard, could collaborate with rental factory
-        //
-        // Q: how does this collaborate with CQRS sub-system??
-
-        return null;
-    }
-
     ////////////////////////
 
     @Override
