@@ -19,6 +19,8 @@ public class Truck {
     @Column(name = "mileage")
     private Integer mileage;
 
+    private MakeModel makeModel;
+
     @OneToMany(
             mappedBy = "truck",
             cascade = CascadeType.ALL,
@@ -28,10 +30,11 @@ public class Truck {
 
     // TODO: What about a rentalCounter "number of rentals" (since last maintenance?)
 
-    public Truck(String vin, String status, Integer mileage) {
+    public Truck(String vin, String status, Integer mileage, MakeModel makeModel) {
         this.vin = vin;
         this.status = status;
         this.mileage = mileage;
+        this.makeModel = makeModel;
     }
 
     Truck() {
@@ -56,6 +59,10 @@ public class Truck {
 
     public void setMileage(Integer mileage) {
         this.mileage = mileage;
+    }
+
+    public MakeModel getMakeModel() {
+        return makeModel;
     }
 
     public Set<MaintenenceHistory> getMaintenanceHistories() {
@@ -94,6 +101,7 @@ public class Truck {
                 "vin='" + vin + '\'' +
                 ", status='" + status + '\'' +
                 ", mileage=" + mileage +
+                ", makeModel=" + makeModel +
                 ", maintenanceHistories=" + maintenanceHistories +
                 '}';
     }
