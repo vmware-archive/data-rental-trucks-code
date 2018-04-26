@@ -1,6 +1,7 @@
 package io.pivotal.pal.data.rentaltrucks.fleet.domain;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -10,7 +11,7 @@ public class Truck {
 
     @Id
     @Column(name = "vin")
-    private final String vin;
+    private String vin;
 
     @Column(name = "status")
     private String status;
@@ -23,20 +24,16 @@ public class Truck {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private Set<MaintenenceHistory> maintenanceHistories;
+    private Set<MaintenenceHistory> maintenanceHistories = new LinkedHashSet<>();
 
-    public Truck(String vin, String status, Integer mileage, Set<MaintenenceHistory> maintenenceHistories) {
+    public Truck(String vin, String status, Integer mileage) {
         this.vin = vin;
         this.status = status;
         this.mileage = mileage;
-        this.maintenanceHistories = maintenenceHistories;
     }
 
-    private Truck() {
-        this.vin = null;
-        this.status = null;
-        this.mileage = null;
-        this.maintenanceHistories = null;
+    Truck() {
+        // default constructor
     }
 
     public String getVin() {
@@ -63,24 +60,17 @@ public class Truck {
         return maintenanceHistories;
     }
 
-    public void setMaintenanceHistories(Set<MaintenenceHistory> maintenanceHistories) {
-        this.maintenanceHistories = maintenanceHistories;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Truck truck = (Truck) o;
-        return Objects.equals(vin, truck.vin) &&
-                Objects.equals(status, truck.status) &&
-                Objects.equals(mileage, truck.mileage);
+        return Objects.equals(vin, truck.vin);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(vin, status, mileage);
+        return Objects.hash(vin);
     }
 
     @Override
@@ -89,6 +79,7 @@ public class Truck {
                 "vin='" + vin + '\'' +
                 ", status='" + status + '\'' +
                 ", mileage=" + mileage +
+                ", maintenanceHistories=" + maintenanceHistories +
                 '}';
     }
 }

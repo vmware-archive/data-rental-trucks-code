@@ -20,10 +20,8 @@ public class RentalManager {
                 truck.getVin(),
                 reservation.getStartDate(),
                 reservation.getEndDate(),
-                null,
                 reservation.getCustomerName(),
-                truck.getMileage(),
-                null
+                truck.getMileage()
         );
         Rental savedRental = rentalRepository.save(rental);
 

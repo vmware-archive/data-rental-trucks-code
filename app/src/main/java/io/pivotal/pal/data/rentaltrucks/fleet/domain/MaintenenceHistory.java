@@ -10,7 +10,7 @@ public class MaintenenceHistory {
 
     @Id
     @Column(name = "id")
-    private final String id;
+    private String id;
 
     @Column(name = "start_date")
     private LocalDate startDate;
@@ -21,24 +21,19 @@ public class MaintenenceHistory {
     @Column(name = "comments")
     private String comments;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "truck_id")
     private Truck truck;
 
-    public MaintenenceHistory(String id, LocalDate startDate, LocalDate endDate, String comments, Truck truck) {
+    public MaintenenceHistory(String id, LocalDate startDate, String comments, Truck truck) {
         this.id = id;
         this.startDate = startDate;
-        this.endDate = endDate;
         this.comments = comments;
         this.truck = truck;
     }
 
-    private MaintenenceHistory() {
-        this.id = null;
-        this.startDate = null;
-        this.endDate = null;
-        this.comments = null;
-        this.truck = null;
+    MaintenenceHistory() {
+        // default constructor
     }
 
     public String getId() {
@@ -47,10 +42,6 @@ public class MaintenenceHistory {
 
     public LocalDate getStartDate() {
         return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
     }
 
     public LocalDate getEndDate() {
@@ -73,26 +64,17 @@ public class MaintenenceHistory {
         return truck;
     }
 
-    public void setTruck(Truck truck) {
-        this.truck = truck;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MaintenenceHistory that = (MaintenenceHistory) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(startDate, that.startDate) &&
-                Objects.equals(endDate, that.endDate) &&
-                Objects.equals(comments, that.comments) &&
-                Objects.equals(truck, that.truck);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(id, startDate, endDate, comments, truck);
+        return Objects.hash(id);
     }
 
     @Override

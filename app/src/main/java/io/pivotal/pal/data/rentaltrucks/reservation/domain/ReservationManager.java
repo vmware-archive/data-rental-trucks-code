@@ -44,7 +44,7 @@ public class ReservationManager {
     public void finalizeReservation(Reservation reservation) {
         // ideally assigns a confirmation number but too bad we did this already
         // what logic actually belongs in reservation?
-        reservation.finalizeMe();
+        reservation.finalizeConfirmation();
         reservationRepository.save(reservation);
 
         // what else:  update some value or history object based on date of finalize event

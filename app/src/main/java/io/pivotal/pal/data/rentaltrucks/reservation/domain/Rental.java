@@ -13,7 +13,7 @@ public class Rental {
 
     @Id
     @Column(name = "confirmation_number")
-    private final String confirmationNumber;
+    private String confirmationNumber;
 
     @Column(name = "status")
     private String status;
@@ -43,33 +43,22 @@ public class Rental {
 
     public Rental(String confirmationNumber,
                   String status,
-                  String truckId, LocalDate pickupDate,
+                  String truckId,
+                  LocalDate pickupDate,
                   LocalDate scheduledDropoffDate,
-                  LocalDate dropoffDate,
                   String customerName,
-                  Integer pickupMileage,
-                  Integer dropoffMileage) {
+                  Integer pickupMileage) {
         this.confirmationNumber = confirmationNumber;
         this.status = status;
         this.truckId = truckId;
         this.pickupDate = pickupDate;
         this.scheduledDropoffDate = scheduledDropoffDate;
-        this.dropoffDate = dropoffDate;
         this.customerName = customerName;
         this.pickupMileage = pickupMileage;
-        this.dropoffMileage = dropoffMileage;
     }
 
-    private Rental() {
-        this.confirmationNumber = null;
-        this.status = null;
-        this.truckId = null;
-        this.pickupDate = null;
-        this.scheduledDropoffDate = null;
-        this.dropoffDate = null;
-        this.customerName = null;
-        this.pickupMileage = null;
-        this.dropoffMileage = null;
+    Rental() {
+        // default constructor
     }
 
     public String getConfirmationNumber() {
@@ -88,16 +77,8 @@ public class Rental {
         return pickupDate;
     }
 
-    public void setPickupDate(LocalDate pickupDate) {
-        this.pickupDate = pickupDate;
-    }
-
     public LocalDate getScheduledDropoffDate() {
         return scheduledDropoffDate;
-    }
-
-    public void setScheduledDropoffDate(LocalDate scheduledDropoffDate) {
-        this.scheduledDropoffDate = scheduledDropoffDate;
     }
 
     public LocalDate getDropoffDate() {
@@ -112,16 +93,8 @@ public class Rental {
         return customerName;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
     public Integer getPickupMileage() {
         return pickupMileage;
-    }
-
-    public void setPickupMileage(Integer pickupMileage) {
-        this.pickupMileage = pickupMileage;
     }
 
     public Integer getDropoffMileage() {

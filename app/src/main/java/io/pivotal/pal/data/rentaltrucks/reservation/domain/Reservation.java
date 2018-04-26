@@ -13,7 +13,7 @@ public class Reservation {
 
     @Id
     @Column(name = "confirmation_number")
-    private final String confirmationNumber;
+    private String confirmationNumber;
 
     @Column(name = "status")
     private String status;
@@ -35,12 +35,8 @@ public class Reservation {
         this.customerName = customerName;
     }
 
-    private Reservation() {
-        this.confirmationNumber = null;
-        this.status = null;
-        this.startDate = null;
-        this.endDate = null;
-        this.customerName = null;
+    Reservation() {
+        // default constructor
     }
 
     ////////////////////////
@@ -61,31 +57,18 @@ public class Reservation {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
     public LocalDate getEndDate() {
         return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
     }
 
     public String getCustomerName() {
         return customerName;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
-    }
-
-
     ////////////////////////
 
 
-    public void finalizeMe() {
+    public void finalizeConfirmation() {
         // poor man's state machine
         if (!status.equals("REQUESTED")) {
             throw new IllegalStateException("Reservation must be REQUESTED in order to FINALIZE");

@@ -12,7 +12,7 @@ public class Truck {
 
     @Id
     @Column(name = "vin")
-    private final String vin;
+    private String vin;
 
     @Column(name = "status")
     private String status;
@@ -26,10 +26,8 @@ public class Truck {
         this.mileage = mileage;
     }
 
-    private Truck() {
-        this.vin = null;
-        this.status = null;
-        this.mileage = null;
+    Truck() {
+        // default constructor
     }
 
     public String getVin() {
