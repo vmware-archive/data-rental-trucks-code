@@ -17,11 +17,31 @@ spring:
     driver-class-name: org.hsqldb.jdbc.JDBCDriver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
     database: hsql
     show-sql: true
+
+---
+
+spring:
+  profiles: h2
+  datasource:
+    url: jdbc:h2:mem:rentaltrucks;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    database: h2
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
 ---
 
@@ -33,8 +53,9 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
     show-sql: false

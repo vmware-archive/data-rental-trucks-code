@@ -10,6 +10,7 @@ dependencies {
     implementation('org.hibernate:hibernate-java8')
 
     runtimeOnly('org.hsqldb:hsqldb')
+    runtimeOnly('com.h2database:h2')
     runtimeOnly('org.postgresql:postgresql')
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
 
