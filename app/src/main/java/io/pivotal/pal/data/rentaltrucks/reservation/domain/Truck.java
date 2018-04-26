@@ -52,6 +52,10 @@ public class Truck {
 
     ////////////////////////
 
+    public void withdrawFromYard() {
+        status = "PICKED_UP";
+    }
+
     public void returnToYard(Integer dropOffMileage) {
         status = "AVAILABLE";
         mileage = dropOffMileage;

@@ -23,21 +23,18 @@ public class CompletePickupEventHandler implements AsyncEventHandler<TruckPicked
         // rehydrate a reservation from confirmation number
         Reservation reservation = reservationRepository.findOne(data.getConfirmationNumber());
 
-        // TODO: revisit consistency between the following operations:
-        // - update status on reservation
-        // - update status on truck
-        // - creating the rental
+        // TODO: revisit consistency between the following operations
 
         // update truck to RENTED status
         Truck truck = truckRepository.findOne(data.getTruckVin());
-        truck.setStatus("RENTED");
+        truck.withdrawFromYard();
         truckRepository.save(truck);
 
         // update reservation to COMPLETED status
-        reservation.setStatus("COMPLETED");
+        reservation.complete();
         reservationRepository.save(reservation);
 
         // create rental in PICKED_UP status
-        Rental rental = rentalManager.pickupReservedTruck(reservation, truck);
+        rentalManager.pickupReservedTruck(reservation, truck);
     }
 }

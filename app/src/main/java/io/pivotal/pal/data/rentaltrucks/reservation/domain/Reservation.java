@@ -76,6 +76,10 @@ public class Reservation {
         status = "FINALIZED";
     }
 
+    public void complete() {
+        status = "COMPLETED";
+    }
+
     // initiated by system
     public void failed() {
         // depending on the reservation state, may need to adjust the trucks on hand
