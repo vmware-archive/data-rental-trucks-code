@@ -4,6 +4,13 @@ server:
   port: 8780
 
 spring:
+  profiles:
+    include: hsql
+
+---
+
+spring:
+  profiles: hsql
   datasource:
     url: jdbc:hsqldb:mem:rentaltrucks
     username: sa
@@ -11,7 +18,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
     database: hsql
+    show-sql: true
 
 ---
 
@@ -19,9 +29,12 @@ spring:
   profiles: postgresql
   datasource:
     url: jdbc:postgresql://localhost/rentaltrucks
-    username: dwadden
+    username: ${user.name}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: create-drop
-    database: postgresql
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    show-sql: false
