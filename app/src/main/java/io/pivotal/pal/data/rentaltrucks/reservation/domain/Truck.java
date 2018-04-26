@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Objects;
 
-@Entity(name = "ReservationTruck")
-@Table(name = "reservation_truck")
+@Entity
+@Table(name = "truck", schema = "reservation")
 public class Truck {
 
     @Id

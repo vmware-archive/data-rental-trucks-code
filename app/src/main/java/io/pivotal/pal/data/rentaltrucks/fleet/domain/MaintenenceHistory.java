@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity(name = "MaintenanceHistory")
-@Table(name = "maintenance_history")
+@Entity
+@Table(name = "maintenance_history", schema = "fleet")
 public class MaintenenceHistory {
 
     @Id

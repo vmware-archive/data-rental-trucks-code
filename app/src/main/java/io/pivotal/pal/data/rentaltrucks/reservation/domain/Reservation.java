@@ -3,10 +3,12 @@ package io.pivotal.pal.data.rentaltrucks.reservation.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
+@Table(name = "reservation", schema = "reservation")
 public class Reservation {
 
     @Id

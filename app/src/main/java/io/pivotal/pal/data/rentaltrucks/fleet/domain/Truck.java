@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity(name = "fleet_truck")
-@Table(name = "fleet_truck")
+@Entity
+@Table(name = "truck", schema = "fleet")
 public class Truck {
 
     @Id
