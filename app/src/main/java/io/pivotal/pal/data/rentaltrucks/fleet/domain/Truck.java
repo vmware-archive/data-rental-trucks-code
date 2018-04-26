@@ -1,9 +1,11 @@
 package io.pivotal.pal.data.rentaltrucks.fleet.domain;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity(name = "fleetTruck")
 @Table(name = "truck", schema = "fleet")
@@ -78,6 +80,16 @@ public class Truck {
     public void returnToYard(Integer dropOffMileage) {
         status = "AVAILABLE";
         mileage = dropOffMileage;
+    }
+
+    public void moveToMaintenance(LocalDate startDate) {
+        // update truck status=IN_MAINTENANCE
+        status = "IN_MAINTENANCE";
+
+        // create entry in maintenance_history with start info
+        MaintenenceHistory maintenenceHistory =
+                new MaintenenceHistory(UUID.randomUUID().toString(), startDate, "stubbed-comments", this);
+        maintenanceHistories.add(maintenenceHistory);
     }
 
     ////////////////////////

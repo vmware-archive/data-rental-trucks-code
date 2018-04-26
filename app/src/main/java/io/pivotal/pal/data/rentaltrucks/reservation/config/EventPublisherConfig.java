@@ -6,7 +6,7 @@ import io.pivotal.pal.data.rentaltrucks.event.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration("reservationEventPublisherConfig")
 public class EventPublisherConfig {
 
     @Bean

@@ -20,4 +20,9 @@ public class SubscriberAdapterConfig {
     public AsyncEventSubscriberAdapter<TruckPickedUpEvent> withdrawTruckFromYardSubscriberAdapter(WithdrawTruckFromYardHandler handler) {
         return new AsyncEventSubscriberAdapter<>("truck-picked-up", handler);
     }
+
+    @Bean
+    public AsyncEventSubscriberAdapter<TruckEnteredMaintenanceEvent> truckEnteredMaintenanceSubscriberAdapter(TruckEnteredMaintenanceHandler handler) {
+        return new AsyncEventSubscriberAdapter<>("truck-entered-maintenance", handler);
+    }
 }
