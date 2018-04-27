@@ -1,6 +1,6 @@
 package io.pivotal.pal.data.rentaltrucks.fleet.config;
 
-import io.pivotal.pal.data.rentaltruck.framework.event.AsyncEventSubscriberAdapter;
+import io.pivotal.pal.data.framework.event.AsyncEventSubscriberAdapter;
 import io.pivotal.pal.data.rentaltrucks.event.TruckDroppedOffEvent;
 import io.pivotal.pal.data.rentaltrucks.event.TruckEnteredMaintenanceEvent;
 import io.pivotal.pal.data.rentaltrucks.event.TruckPickedUpEvent;

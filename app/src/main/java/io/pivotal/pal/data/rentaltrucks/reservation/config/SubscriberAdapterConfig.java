@@ -1,6 +1,6 @@
 package io.pivotal.pal.data.rentaltrucks.reservation.config;
 
-import io.pivotal.pal.data.rentaltruck.framework.event.AsyncEventSubscriberAdapter;
+import io.pivotal.pal.data.framework.event.AsyncEventSubscriberAdapter;
 import io.pivotal.pal.data.rentaltrucks.event.*;
 import io.pivotal.pal.data.rentaltrucks.reservation.handler.*;
 import org.springframework.context.annotation.Bean;

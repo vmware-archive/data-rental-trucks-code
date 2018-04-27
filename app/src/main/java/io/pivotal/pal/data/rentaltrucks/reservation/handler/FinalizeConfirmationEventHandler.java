@@ -1,6 +1,6 @@
 package io.pivotal.pal.data.rentaltrucks.reservation.handler;
 
-import io.pivotal.pal.data.rentaltruck.framework.event.AsyncEventHandler;
+import io.pivotal.pal.data.framework.event.AsyncEventHandler;
 import io.pivotal.pal.data.rentaltrucks.event.TruckAvailableEvent;
 import io.pivotal.pal.data.rentaltrucks.reservation.domain.Reservation;
 import io.pivotal.pal.data.rentaltrucks.reservation.domain.ReservationRepository;

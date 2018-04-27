@@ -1,6 +1,6 @@
 package io.pivotal.pal.data.rentaltrucks.reservation.domain;
 
-import io.pivotal.pal.data.rentaltruck.framework.event.AsyncEventPublisher;
+import io.pivotal.pal.data.framework.event.AsyncEventPublisher;
 import io.pivotal.pal.data.rentaltrucks.event.ReservationInitializedEvent;
 import org.springframework.stereotype.Component;
 

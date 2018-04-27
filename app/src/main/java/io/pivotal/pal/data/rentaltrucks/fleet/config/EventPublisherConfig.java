@@ -1,7 +1,7 @@
 package io.pivotal.pal.data.rentaltrucks.fleet.config;
 
-import io.pivotal.pal.data.rentaltruck.framework.event.AsyncEventPublisher;
-import io.pivotal.pal.data.rentaltruck.framework.event.DefaultAsyncEventPublisher;
+import io.pivotal.pal.data.framework.event.AsyncEventPublisher;
+import io.pivotal.pal.data.framework.event.DefaultAsyncEventPublisher;
 import io.pivotal.pal.data.rentaltrucks.event.TruckEnteredMaintenanceEvent;
 import io.pivotal.pal.data.rentaltrucks.fleet.command.TruckReturnedFromMaintenanceEvent;
 import org.springframework.context.annotation.Bean;

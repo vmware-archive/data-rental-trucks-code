@@ -1,6 +1,6 @@
 package io.pivotal.pal.data.rentaltrucks.fleet.command;
 
-import io.pivotal.pal.data.rentaltruck.framework.event.AsyncEventPublisher;
+import io.pivotal.pal.data.framework.event.AsyncEventPublisher;
 import org.springframework.stereotype.Service;
 
 @Service
