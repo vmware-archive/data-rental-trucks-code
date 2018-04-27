@@ -4,7 +4,7 @@ import io.pivotal.pal.data.framework.event.AsyncEventSubscriberAdapter;
 import io.pivotal.pal.data.rentaltrucks.event.TruckDroppedOffEvent;
 import io.pivotal.pal.data.rentaltrucks.event.TruckEnteredMaintenanceEvent;
 import io.pivotal.pal.data.rentaltrucks.event.TruckPickedUpEvent;
-import io.pivotal.pal.data.rentaltrucks.fleet.command.TruckReturnedFromMaintenanceEvent;
+import io.pivotal.pal.data.rentaltrucks.event.TruckReturnedFromMaintenanceEvent;
 import io.pivotal.pal.data.rentaltrucks.fleet.handler.ReturnTruckToYardHandler;
 import io.pivotal.pal.data.rentaltrucks.fleet.handler.TruckEnteredMaintenanceHandler;
 import io.pivotal.pal.data.rentaltrucks.fleet.handler.TruckReturnedFromMaintenanceHandler;
@@ -32,6 +32,6 @@ public class SubscriberAdapterConfig {
 
     @Bean
     public AsyncEventSubscriberAdapter<TruckReturnedFromMaintenanceEvent> truckReturnedFromMaintenanceSubscriberAdapter(TruckReturnedFromMaintenanceHandler handler) {
-        return new AsyncEventSubscriberAdapter<>("truck-entered-maintenance", handler);
+        return new AsyncEventSubscriberAdapter<>("truck-returned-from-maintenance", handler);
     }
 }

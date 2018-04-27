@@ -14,7 +14,7 @@ public class AvailableTruckQueryController {
         this.truckRepository = truckRepository;
     }
 
-    @GetMapping("/trucks")
+    @GetMapping("/available-trucks")
     public Iterable<Truck> listTrucks() {
         return truckRepository.findAllByStatus("AVAILABLE");
     }

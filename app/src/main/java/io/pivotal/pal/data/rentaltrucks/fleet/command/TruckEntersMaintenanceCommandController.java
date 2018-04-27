@@ -19,9 +19,9 @@ public class TruckEntersMaintenanceCommandController {
         this.service = service;
     }
 
-    @PostMapping("/not-ready-to-name-this-yet")
-    public ResponseEntity<Void> enterTheTruckToThe36Chambers(@RequestBody TruckEntersMaintenanceCommandDto commandDto,
-                                                             UriComponentsBuilder uriComponentsBuilder) {
+    @PostMapping("/enters-to-maintenance")
+    public ResponseEntity<Void> entersTruckToMaintenance(@RequestBody TruckEntersMaintenanceCommandDto commandDto,
+                                                         UriComponentsBuilder uriComponentsBuilder) {
 
         service.enterTheTruck(commandDto);
 

@@ -69,6 +69,7 @@ public class TruckAvailabilityEventHandler implements AsyncEventHandler<Reservat
                     .count();
             logger.info("trucksReserved={}", truckReservedCount);
 
+            // assumes that all trucks will be in-service
             Iterable<Truck> trucks = truckRepository.findAll();
             long truckCount = StreamSupport.stream(trucks.spliterator(), false).count();
             logger.info("truckCount={}", truckCount);

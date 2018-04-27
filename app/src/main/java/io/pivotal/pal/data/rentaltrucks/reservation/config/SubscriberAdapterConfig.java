@@ -33,4 +33,14 @@ public class SubscriberAdapterConfig {
     public AsyncEventSubscriberAdapter<TruckDroppedOffEvent> completeDropOffEventSubscriber(CompleteDropOffEventHandler handler) {
         return new AsyncEventSubscriberAdapter<>("truck-dropped-off", handler);
     }
+
+    @Bean
+    public AsyncEventSubscriberAdapter<TruckReturnedFromMaintenanceEvent> truckBackToServiceEventSubscriber(TruckBackToServiceHandler handler) {
+        return new AsyncEventSubscriberAdapter<>("truck-returned-from-maintenance", handler);
+    }
+
+    @Bean
+    public AsyncEventSubscriberAdapter<TruckEnteredMaintenanceEvent> truckOutOfServiceEventSubscriber(TruckOutOfServiceHandler handler) {
+        return new AsyncEventSubscriberAdapter<>("truck-entered-maintenance", handler);
+    }
 }

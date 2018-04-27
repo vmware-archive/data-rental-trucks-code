@@ -1,4 +1,4 @@
-package io.pivotal.pal.data.rentaltrucks.fleet.command;
+package io.pivotal.pal.data.rentaltrucks.event;
 
 import java.time.LocalDate;
 import java.util.Objects;

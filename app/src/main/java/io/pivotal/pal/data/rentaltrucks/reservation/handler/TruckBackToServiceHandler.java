@@ -1,26 +1,26 @@
-package io.pivotal.pal.data.rentaltrucks.fleet.handler;
+package io.pivotal.pal.data.rentaltrucks.reservation.handler;
 
 import io.pivotal.pal.data.framework.event.AsyncEventHandler;
 import io.pivotal.pal.data.rentaltrucks.event.TruckReturnedFromMaintenanceEvent;
-import io.pivotal.pal.data.rentaltrucks.fleet.domain.Truck;
-import io.pivotal.pal.data.rentaltrucks.fleet.domain.TruckRepository;
+import io.pivotal.pal.data.rentaltrucks.reservation.domain.Truck;
+import io.pivotal.pal.data.rentaltrucks.reservation.domain.TruckRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TruckReturnedFromMaintenanceHandler implements AsyncEventHandler<TruckReturnedFromMaintenanceEvent> {
+public class TruckBackToServiceHandler implements AsyncEventHandler<TruckReturnedFromMaintenanceEvent> {
 
     private final TruckRepository truckRepository;
 
-    public TruckReturnedFromMaintenanceHandler(TruckRepository truckRepository) {
+    public TruckBackToServiceHandler(TruckRepository truckRepository) {
         this.truckRepository = truckRepository;
     }
 
     @Override
     public void onEvent(TruckReturnedFromMaintenanceEvent data) {
 
-        // return the truck to the yard
+        // update the truck status to AVAILABLE
         Truck truck = truckRepository.findOne(data.getTruckVin());
-        truck.returnFromMaintenance(data.getEndDate());
+        truck.returnToYardFromMaintenance();
         truckRepository.save(truck);
     }
 }

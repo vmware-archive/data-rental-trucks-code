@@ -61,6 +61,14 @@ public class Truck {
         mileage = dropOffMileage;
     }
 
+    public void withdrawFromYardToSendToMaintenance() {
+        status = "OUT_OF_SERVICE";
+    }
+
+    public void returnToYardFromMaintenance() {
+        status = "AVAILABLE";
+    }
+
     ////////////////////////
 
     @Override
