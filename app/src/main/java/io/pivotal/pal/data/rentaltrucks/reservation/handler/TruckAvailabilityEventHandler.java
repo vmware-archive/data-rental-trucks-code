@@ -48,7 +48,7 @@ public class TruckAvailabilityEventHandler implements AsyncEventHandler<Reservat
         logger.info("handling event: {}", data);
 
         // check the availaility of trucks on the desired date range
-        // TODO: add predicate to filter reservations by status=FINALIZED
+        // TODO: add predicate to filter reservations by status=FINALIZED or status=COMPLETED
         Collection<Reservation> reservations =
                 reservationRepository.findAllByStartDateBeforeAndEndDateAfter(data.getDropoffDate(), data.getPickupDate());
         logger.info("found reservations in window: {}", reservations);
@@ -70,8 +70,8 @@ public class TruckAvailabilityEventHandler implements AsyncEventHandler<Reservat
             logger.info("trucksReserved={}", truckReservedCount);
 
             // assumes that all trucks will be in-service
-            Iterable<Truck> trucks = truckRepository.findAll();
-            long truckCount = StreamSupport.stream(trucks.spliterator(), false).count();
+            Iterable<Truck> availableTrucks = truckRepository.findAllByStatus("AVAILABLE");
+            long truckCount = StreamSupport.stream(availableTrucks.spliterator(), false).count();
             logger.info("truckCount={}", truckCount);
 
             // if no trucks available, short-circuit and abort
@@ -119,15 +119,4 @@ public class TruckAvailabilityEventHandler implements AsyncEventHandler<Reservat
         }
     }
 
-    static class StreamUtils {
-
-        public static <T> Stream<T> asStream(Iterator<T> sourceIterator) {
-            return asStream(sourceIterator, false);
-        }
-
-        public static <T> Stream<T> asStream(Iterator<T> sourceIterator, boolean parallel) {
-            Iterable<T> iterable = () -> sourceIterator;
-            return StreamSupport.stream(iterable.spliterator(), parallel);
-        }
-    }
 }
