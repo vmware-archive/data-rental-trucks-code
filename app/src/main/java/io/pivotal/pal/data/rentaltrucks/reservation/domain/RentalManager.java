@@ -34,4 +34,15 @@ public class RentalManager {
 
         // send dropoff receipt
     }
+
+    public Rental dropoffRental(String confirmationNumber, Integer dropOffMileage) {
+        Rental rental = rentalRepository.findOne(confirmationNumber);
+        rental.dropoff(rental.getScheduledDropoffDate(), dropOffMileage);
+
+        return rentalRepository.save(rental);
+    }
+
+    public Rental findByConfirmationNumber(String confirmationNumber) {
+        return rentalRepository.findOne(confirmationNumber);
+    }
 }

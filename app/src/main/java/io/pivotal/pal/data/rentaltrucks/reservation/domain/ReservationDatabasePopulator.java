@@ -1,9 +1,5 @@
-package io.pivotal.pal.data.rentaltrucks.reservation.config;
+package io.pivotal.pal.data.rentaltrucks.reservation.domain;
 
-import io.pivotal.pal.data.rentaltrucks.reservation.domain.Reservation;
-import io.pivotal.pal.data.rentaltrucks.reservation.domain.ReservationRepository;
-import io.pivotal.pal.data.rentaltrucks.reservation.domain.Truck;
-import io.pivotal.pal.data.rentaltrucks.reservation.domain.TruckRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -12,7 +8,7 @@ import java.time.LocalDate;
 import static java.util.Arrays.asList;
 
 @Component
-public class ReservationDatabasePopulator {
+class ReservationDatabasePopulator {
 
     private final ReservationRepository reservationRepository;
     private final TruckRepository truckRepository;

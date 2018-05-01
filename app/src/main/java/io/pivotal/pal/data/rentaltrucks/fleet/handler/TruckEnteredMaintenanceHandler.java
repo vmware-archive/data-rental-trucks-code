@@ -2,26 +2,20 @@ package io.pivotal.pal.data.rentaltrucks.fleet.handler;
 
 import io.pivotal.pal.data.framework.event.AsyncEventHandler;
 import io.pivotal.pal.data.rentaltrucks.event.TruckEnteredMaintenanceEvent;
-import io.pivotal.pal.data.rentaltrucks.fleet.domain.Truck;
-import io.pivotal.pal.data.rentaltrucks.fleet.domain.TruckRepository;
+import io.pivotal.pal.data.rentaltrucks.fleet.domain.TruckManager;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TruckEnteredMaintenanceHandler implements AsyncEventHandler<TruckEnteredMaintenanceEvent> {
 
-    private final TruckRepository truckRepository;
+    private final TruckManager truckManager;
 
-    public TruckEnteredMaintenanceHandler(TruckRepository truckRepository) {
-        this.truckRepository = truckRepository;
+    public TruckEnteredMaintenanceHandler(TruckManager truckManager) {
+        this.truckManager = truckManager;
     }
 
     @Override
     public void onEvent(TruckEnteredMaintenanceEvent data) {
-        // rehydrate truck using truck vin
-        Truck truck = truckRepository.findOne(data.getTruckVin());
-
-        // move truck to in maintenance and log the activity in history table
-        truck.moveToMaintenance(data.getStartDate());
-        truckRepository.save(truck);
+        truckManager.moveTruckToMaintenance(data.getTruckVin(), data.getStartDate());
     }
 }

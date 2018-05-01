@@ -1,8 +1,5 @@
-package io.pivotal.pal.data.rentaltrucks.fleet.config;
+package io.pivotal.pal.data.rentaltrucks.fleet.domain;
 
-import io.pivotal.pal.data.rentaltrucks.fleet.domain.MakeModel;
-import io.pivotal.pal.data.rentaltrucks.fleet.domain.Truck;
-import io.pivotal.pal.data.rentaltrucks.fleet.domain.TruckRepository;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -10,7 +7,7 @@ import javax.annotation.PostConstruct;
 import static java.util.Arrays.asList;
 
 @Component
-public class FleetDatabasePopulator {
+class FleetDatabasePopulator {
 
     private final TruckRepository truckRepository;
 

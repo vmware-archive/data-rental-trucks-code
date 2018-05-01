@@ -2,24 +2,20 @@ package io.pivotal.pal.data.rentaltrucks.fleet.handler;
 
 import io.pivotal.pal.data.framework.event.AsyncEventHandler;
 import io.pivotal.pal.data.rentaltrucks.event.TruckPickedUpEvent;
-import io.pivotal.pal.data.rentaltrucks.fleet.domain.Truck;
-import io.pivotal.pal.data.rentaltrucks.fleet.domain.TruckRepository;
+import io.pivotal.pal.data.rentaltrucks.fleet.domain.TruckManager;
 import org.springframework.stereotype.Component;
 
 @Component
 public class WithdrawTruckFromYardHandler implements AsyncEventHandler<TruckPickedUpEvent> {
 
-    private final TruckRepository truckRepository;
+    private final TruckManager truckManager;
 
-    public WithdrawTruckFromYardHandler(TruckRepository truckRepository) {
-        this.truckRepository = truckRepository;
+    public WithdrawTruckFromYardHandler(TruckManager truckManager) {
+        this.truckManager = truckManager;
     }
 
     @Override
     public void onEvent(TruckPickedUpEvent data) {
-        // update the fleet truck status
-        Truck truck = truckRepository.findOne(data.getTruckVin());
-        truck.withdrawFromYard();
-        truckRepository.save(truck);
+        truckManager.withdrawTruckFromyard(data.getTruckVin());
     }
 }

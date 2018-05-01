@@ -8,31 +8,27 @@ import org.springframework.stereotype.Component;
 @Component
 public class CompletePickupEventHandler implements AsyncEventHandler<TruckPickedUpEvent> {
 
+    private final ReservationManager reservationManager;
     private final RentalManager rentalManager;
-    private final ReservationRepository reservationRepository;
-    private final TruckRepository truckRepository;
+    private final TruckManager truckManager;
 
-    public CompletePickupEventHandler(RentalManager rentalManager, ReservationRepository reservationRepository, TruckRepository truckRepository) {
+    public CompletePickupEventHandler(ReservationManager reservationManager,
+                                      RentalManager rentalManager,
+                                      TruckManager truckManager) {
+        this.reservationManager = reservationManager;
         this.rentalManager = rentalManager;
-        this.reservationRepository = reservationRepository;
-        this.truckRepository = truckRepository;
+        this.truckManager = truckManager;
     }
 
     @Override
     public void onEvent(TruckPickedUpEvent data) {
-        // rehydrate a reservation from confirmation number
-        Reservation reservation = reservationRepository.findOne(data.getConfirmationNumber());
-
         // TODO: revisit consistency between the following operations
 
         // update truck to RENTED status
-        Truck truck = truckRepository.findOne(data.getTruckVin());
-        truck.withdrawFromYard();
-        truckRepository.save(truck);
+        Truck truck = truckManager.withdrawTruckFromYard(data.getTruckVin());
 
         // update reservation to COMPLETED status
-        reservation.complete();
-        reservationRepository.save(reservation);
+        Reservation reservation = reservationManager.complete(data.getConfirmationNumber());
 
         // create rental in PICKED_UP status
         rentalManager.pickupReservedTruck(reservation, truck);

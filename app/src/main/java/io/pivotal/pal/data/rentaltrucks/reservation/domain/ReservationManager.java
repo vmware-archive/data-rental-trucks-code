@@ -4,6 +4,9 @@ import io.pivotal.pal.data.framework.event.AsyncEventPublisher;
 import io.pivotal.pal.data.rentaltrucks.event.ReservationInitializedEvent;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.util.Collection;
+
 @Component
 public class ReservationManager {
 
@@ -43,15 +46,27 @@ public class ReservationManager {
 
     public void finalizeReservation(Reservation reservation) {
         // ideally assigns a confirmation number but too bad we did this already
-        // what logic actually belongs in reservation?
         reservation.finalizeConfirmation();
         reservationRepository.save(reservation);
 
+        // what logic actually belongs in reservation?
         // what else:  update some value or history object based on date of finalize event
+    }
 
-        // updates the counters of trucks available (for lack of better impl)
+    public void finalizeReservation(String confirmationNumber) {
+        Reservation reservation = reservationRepository.findOne(confirmationNumber);
 
-        // sends email ?
+        finalizeReservation(reservation);
+    }
+
+    public Reservation complete(Reservation reservation) {
+        reservation.complete();
+        return reservationRepository.save(reservation);
+    }
+
+    public Reservation complete(String confirmationNumber) {
+        Reservation reservation = reservationRepository.findOne(confirmationNumber);
+        return complete(reservation);
     }
 
     public void failReservation(Reservation reservation) {
@@ -64,4 +79,11 @@ public class ReservationManager {
         reservationRepository.save(reservation);
     }
 
+    public Collection<Reservation> findReservationsBetween(LocalDate pickupDate, LocalDate dropoffDate) {
+        return reservationRepository.findAllByStartDateBeforeAndEndDateAfter(dropoffDate, pickupDate);
+    }
+
+    public Iterable<Reservation> listReservations() {
+        return reservationRepository.findAll();
+    }
 }
