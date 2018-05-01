@@ -2,6 +2,8 @@ package io.pivotal.pal.data.rentaltrucks.reservation.domain;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+
 @Component("reservationTruckManager")
 public class TruckManager {
 
@@ -23,8 +25,8 @@ public class TruckManager {
         return truckRepository.save(truck);
     }
 
-    public Iterable<Truck> findTrucksByStatus(String status) {
-        return truckRepository.findAllByStatus("AVAILABLE");
+    public Collection<Truck> findTrucksByStatusNotIn(String status) {
+        return truckRepository.findByStatusNotIn(status);
     }
 
     public Truck returnTruckToYardFromMaintenance(String truckVin) {

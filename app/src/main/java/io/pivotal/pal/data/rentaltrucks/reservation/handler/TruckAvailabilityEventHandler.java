@@ -18,7 +18,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 import static java.util.stream.Collectors.toList;
@@ -71,8 +70,8 @@ public class TruckAvailabilityEventHandler implements AsyncEventHandler<Reservat
             logger.info("trucksReserved={}", truckReservedCount);
 
             // assumes that all trucks will be in-service
-            Iterable<Truck> availableTrucks = truckManager.findTrucksByStatus("AVAILABLE");
-            long truckCount = StreamSupport.stream(availableTrucks.spliterator(), false).count();
+            Collection<Truck> availableTrucks = truckManager.findTrucksByStatusNotIn("OUT_OF_SERVICE");
+            int truckCount = availableTrucks.size();
             logger.info("truckCount={}", truckCount);
 
             // if no trucks available, short-circuit and abort

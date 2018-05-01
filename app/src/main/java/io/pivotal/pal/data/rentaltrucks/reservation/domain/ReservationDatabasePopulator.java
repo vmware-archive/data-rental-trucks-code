@@ -44,10 +44,11 @@ class ReservationDatabasePopulator {
 
         reservationRepository.save(asList(reservation1, reservation2, reservation3));
 
-        Truck truck1 = new Truck("001", "RENTED", 10000);
-        Truck truck2 = new Truck("002", "RENTED", 10000);
+        Truck truck1 = new Truck("001", "PICKED_UP", 10000);
+        Truck truck2 = new Truck("002", "PICKED_UP", 10000);
         Truck truck3 = new Truck("003", "AVAILABLE", 10000);
+        Truck truck4 = new Truck("004", "AVAILABLE", 10000);
 
-        truckRepository.save(asList(truck1, truck2, truck3));
+        truckRepository.save(asList(truck1, truck2, truck3, truck4));
     }
 }
