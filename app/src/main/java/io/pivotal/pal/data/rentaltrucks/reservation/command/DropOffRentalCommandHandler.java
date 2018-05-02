@@ -4,15 +4,15 @@ import io.pivotal.pal.data.framework.event.AsyncEventPublisher;
 import io.pivotal.pal.data.rentaltrucks.event.TruckDroppedOffEvent;
 import io.pivotal.pal.data.rentaltrucks.reservation.domain.Rental;
 import io.pivotal.pal.data.rentaltrucks.reservation.domain.RentalManager;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
-public class DropOffRentalCommandService {
+@Component
+public class DropOffRentalCommandHandler {
 
     private final RentalManager rentalManager;
     private final AsyncEventPublisher<TruckDroppedOffEvent> eventPublisher;
 
-    public DropOffRentalCommandService(RentalManager rentalManager,
+    public DropOffRentalCommandHandler(RentalManager rentalManager,
                                        AsyncEventPublisher<TruckDroppedOffEvent> eventPublisher) {
         this.rentalManager = rentalManager;
         this.eventPublisher = eventPublisher;

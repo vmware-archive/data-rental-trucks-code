@@ -13,17 +13,17 @@ import java.util.Map;
 @RestController
 public class RequestReservationCommandController {
 
-    private final RequestReservationCommandService service;
+    private final RequestReservationCommandHandler commandHandler;
 
-    public RequestReservationCommandController(RequestReservationCommandService service) {
-        this.service = service;
+    public RequestReservationCommandController(RequestReservationCommandHandler commandHandler) {
+        this.commandHandler = commandHandler;
     }
 
     @PostMapping("/reservations-requests")
     public ResponseEntity<Void> rentTruck(@RequestBody RequestReservationCommandDto commandDto,
                                           UriComponentsBuilder uriComponentsBuilder) {
 
-        String confirmationNumber = service.rentTruck(commandDto);
+        String confirmationNumber = commandHandler.rentTruck(commandDto);
 
         Map<String, String> uriVariables = new HashMap<>();
         uriVariables.put("confirmationNumber", confirmationNumber);

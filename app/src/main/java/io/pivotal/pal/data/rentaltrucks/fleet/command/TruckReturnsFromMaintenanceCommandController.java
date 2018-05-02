@@ -10,16 +10,16 @@ import java.net.URI;
 @RestController
 public class TruckReturnsFromMaintenanceCommandController {
 
-    private final TruckReturnsFromMaintenanceCommandService service;
+    private final TruckReturnsFromMaintenanceCommandHandler commandHandler;
 
-    public TruckReturnsFromMaintenanceCommandController(TruckReturnsFromMaintenanceCommandService service) {
-        this.service = service;
+    public TruckReturnsFromMaintenanceCommandController(TruckReturnsFromMaintenanceCommandHandler commandHandler) {
+        this.commandHandler = commandHandler;
     }
 
     @PostMapping("/returns-from-maintenance")
     public ResponseEntity<Void> returnFromMaintenance(@RequestBody TruckReturnsFromMaintenanceCommandDto commandDto) {
 
-        service.returnFromMaintenance(commandDto);
+        commandHandler.returnFromMaintenance(commandDto);
 
         return ResponseEntity.created(URI.create("stubbed")).build(); // FIXME
     }

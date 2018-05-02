@@ -2,14 +2,14 @@ package io.pivotal.pal.data.rentaltrucks.fleet.command;
 
 import io.pivotal.pal.data.framework.event.AsyncEventPublisher;
 import io.pivotal.pal.data.rentaltrucks.event.TruckReturnedFromMaintenanceEvent;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
-public class TruckReturnsFromMaintenanceCommandService {
+@Component
+public class TruckReturnsFromMaintenanceCommandHandler {
 
     private final AsyncEventPublisher<TruckReturnedFromMaintenanceEvent> eventPublisher;
 
-    public TruckReturnsFromMaintenanceCommandService(AsyncEventPublisher<TruckReturnedFromMaintenanceEvent> eventPublisher) {
+    public TruckReturnsFromMaintenanceCommandHandler(AsyncEventPublisher<TruckReturnedFromMaintenanceEvent> eventPublisher) {
         this.eventPublisher = eventPublisher;
     }
 

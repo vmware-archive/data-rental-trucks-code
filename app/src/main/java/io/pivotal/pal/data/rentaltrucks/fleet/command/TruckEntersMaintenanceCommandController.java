@@ -13,17 +13,17 @@ import java.util.Map;
 @RestController
 public class TruckEntersMaintenanceCommandController {
 
-    private final TruckEntersMaintenanceCommandService service;
+    private final TruckEntersMaintenanceCommandHandler commandHandler;
 
-    public TruckEntersMaintenanceCommandController(TruckEntersMaintenanceCommandService service) {
-        this.service = service;
+    public TruckEntersMaintenanceCommandController(TruckEntersMaintenanceCommandHandler commandHandler) {
+        this.commandHandler = commandHandler;
     }
 
     @PostMapping("/enters-to-maintenance")
     public ResponseEntity<Void> entersTruckToMaintenance(@RequestBody TruckEntersMaintenanceCommandDto commandDto,
                                                          UriComponentsBuilder uriComponentsBuilder) {
 
-        service.enterTheTruck(commandDto);
+        commandHandler.enterTheTruck(commandDto);
 
         Map<String, String> uriVariables = new HashMap<>();
         uriVariables.put("truckVin", commandDto.getTruckVin());

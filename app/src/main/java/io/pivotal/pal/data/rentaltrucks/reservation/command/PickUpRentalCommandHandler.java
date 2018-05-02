@@ -2,14 +2,14 @@ package io.pivotal.pal.data.rentaltrucks.reservation.command;
 
 import io.pivotal.pal.data.framework.event.AsyncEventPublisher;
 import io.pivotal.pal.data.rentaltrucks.event.TruckPickedUpEvent;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
-public class PickUpRentalCommandService {
+@Component
+public class PickUpRentalCommandHandler {
 
     private final AsyncEventPublisher<TruckPickedUpEvent> eventPublisher;
 
-    public PickUpRentalCommandService(AsyncEventPublisher<TruckPickedUpEvent> eventPublisher) {
+    public PickUpRentalCommandHandler(AsyncEventPublisher<TruckPickedUpEvent> eventPublisher) {
         this.eventPublisher = eventPublisher;
     }
 

@@ -13,16 +13,16 @@ import java.util.Map;
 @RestController
 public class DropOffRentalCommandController {
 
-    private final DropOffRentalCommandService service;
+    private final DropOffRentalCommandHandler commandHandler;
 
-    public DropOffRentalCommandController(DropOffRentalCommandService service) {
-        this.service = service;
+    public DropOffRentalCommandController(DropOffRentalCommandHandler commandHandler) {
+        this.commandHandler = commandHandler;
     }
 
     @PostMapping("/rental-dropoffs")
     public ResponseEntity<Void> dropOffRental(@RequestBody DropOffRentalCommandDto commandDto,
                                               UriComponentsBuilder uriComponentsBuilder) {
-        service.dropOffRental(commandDto);
+        commandHandler.dropOffRental(commandDto);
 
         Map<String, String> uriVariables = new HashMap<>();
         uriVariables.put("confirmationNumber", commandDto.getConfirmationNumber());
