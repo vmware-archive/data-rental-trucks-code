@@ -2,22 +2,22 @@ package io.pivotal.pal.data.rentaltrucks.reservation.handler;
 
 import io.pivotal.pal.data.framework.event.AsyncEventHandler;
 import io.pivotal.pal.data.rentaltrucks.event.TruckReturnedFromMaintenanceEvent;
-import io.pivotal.pal.data.rentaltrucks.reservation.domain.TruckManager;
+import io.pivotal.pal.data.rentaltrucks.reservation.domain.TruckService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TruckBackToServiceHandler implements AsyncEventHandler<TruckReturnedFromMaintenanceEvent> {
 
-    private final TruckManager truckManager;
+    private final TruckService truckService;
 
-    public TruckBackToServiceHandler(TruckManager truckManager) {
-        this.truckManager = truckManager;
+    public TruckBackToServiceHandler(TruckService truckService) {
+        this.truckService = truckService;
     }
 
     @Override
     public void onEvent(TruckReturnedFromMaintenanceEvent data) {
 
         // update the truck status to AVAILABLE
-        truckManager.returnTruckToYardFromMaintenance(data.getTruckVin());
+        truckService.returnTruckToYardFromMaintenance(data.getTruckVin());
     }
 }

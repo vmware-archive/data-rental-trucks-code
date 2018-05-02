@@ -1,15 +1,15 @@
 package io.pivotal.pal.data.rentaltrucks.reservation.domain;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
-@Component
-public class RentalManager {
+@Service
+public class RentalService {
 
     private final RentalRepository rentalRepository;
 
-    public RentalManager(RentalRepository rentalRepository) {
+    public RentalService(RentalRepository rentalRepository) {
         this.rentalRepository = rentalRepository;
     }
 

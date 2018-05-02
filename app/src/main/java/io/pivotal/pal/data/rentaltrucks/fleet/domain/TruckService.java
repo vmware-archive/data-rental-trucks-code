@@ -1,15 +1,15 @@
 package io.pivotal.pal.data.rentaltrucks.fleet.domain;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
-@Component("fleetTruckManager")
-public class TruckManager {
+@Service("fleetTruckService")
+public class TruckService {
 
     private final TruckRepository truckRepository;
 
-    public TruckManager(TruckRepository truckRepository) {
+    public TruckService(TruckRepository truckRepository) {
         this.truckRepository = truckRepository;
     }
 

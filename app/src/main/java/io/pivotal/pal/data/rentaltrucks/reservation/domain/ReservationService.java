@@ -2,18 +2,18 @@ package io.pivotal.pal.data.rentaltrucks.reservation.domain;
 
 import io.pivotal.pal.data.framework.event.AsyncEventPublisher;
 import io.pivotal.pal.data.rentaltrucks.event.ReservationInitializedEvent;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Collection;
 
-@Component
-public class ReservationManager {
+@Service
+public class ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final AsyncEventPublisher<ReservationInitializedEvent> eventPublisher;
 
-    public ReservationManager(ReservationRepository reservationRepository,
+    public ReservationService(ReservationRepository reservationRepository,
                               AsyncEventPublisher<ReservationInitializedEvent> eventPublisher) {
         this.reservationRepository = reservationRepository;
         this.eventPublisher = eventPublisher;

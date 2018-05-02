@@ -6,9 +6,9 @@ import io.pivotal.pal.data.rentaltrucks.event.ReservationInitializedEvent;
 import io.pivotal.pal.data.rentaltrucks.event.TruckAvailableEvent;
 import io.pivotal.pal.data.rentaltrucks.event.TruckNotAvailableEvent;
 import io.pivotal.pal.data.rentaltrucks.reservation.domain.Reservation;
-import io.pivotal.pal.data.rentaltrucks.reservation.domain.ReservationManager;
+import io.pivotal.pal.data.rentaltrucks.reservation.domain.ReservationService;
 import io.pivotal.pal.data.rentaltrucks.reservation.domain.Truck;
-import io.pivotal.pal.data.rentaltrucks.reservation.domain.TruckManager;
+import io.pivotal.pal.data.rentaltrucks.reservation.domain.TruckService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -29,17 +29,17 @@ public class TruckAvailabilityEventHandler implements AsyncEventHandler<Reservat
 
     private final AsyncEventPublisher<TruckAvailableEvent> truckAvailableEventPublisher;
     private final AsyncEventPublisher<TruckNotAvailableEvent> truckNotAvailableEventPublisher;
-    private final ReservationManager reservationManager;
-    private final TruckManager truckManager;
+    private final ReservationService reservationService;
+    private final TruckService truckService;
 
     public TruckAvailabilityEventHandler(AsyncEventPublisher<TruckAvailableEvent> truckAvailableEventPublisher,
                                          AsyncEventPublisher<TruckNotAvailableEvent> truckNotAvailableEventPublisher,
-                                         ReservationManager reservationManager,
-                                         TruckManager truckManager) {
+                                         ReservationService reservationService,
+                                         TruckService truckService) {
         this.truckAvailableEventPublisher = truckAvailableEventPublisher;
         this.truckNotAvailableEventPublisher = truckNotAvailableEventPublisher;
-        this.reservationManager = reservationManager;
-        this.truckManager = truckManager;
+        this.reservationService = reservationService;
+        this.truckService = truckService;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class TruckAvailabilityEventHandler implements AsyncEventHandler<Reservat
         // check the availaility of trucks on the desired date range
         // TODO: add predicate to filter reservations by status=FINALIZED or status=COMPLETED
         Collection<Reservation> reservations =
-                reservationManager.findReservationsBetween(data.getPickupDate(), data.getDropoffDate());
+                reservationService.findReservationsBetween(data.getPickupDate(), data.getDropoffDate());
 
         logger.info("found reservations in window: {}", reservations);
 
@@ -70,7 +70,7 @@ public class TruckAvailabilityEventHandler implements AsyncEventHandler<Reservat
             logger.info("trucksReserved={}", truckReservedCount);
 
             // assumes that all trucks will be in-service
-            Collection<Truck> availableTrucks = truckManager.findTrucksByStatusNotIn("OUT_OF_SERVICE");
+            Collection<Truck> availableTrucks = truckService.findTrucksByStatusNotIn("OUT_OF_SERVICE");
             int truckCount = availableTrucks.size();
             logger.info("truckCount={}", truckCount);
 

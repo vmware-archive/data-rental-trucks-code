@@ -2,7 +2,7 @@ package io.pivotal.pal.data.rentaltrucks.reservation.handler;
 
 import io.pivotal.pal.data.framework.event.AsyncEventHandler;
 import io.pivotal.pal.data.rentaltrucks.event.TruckAvailableEvent;
-import io.pivotal.pal.data.rentaltrucks.reservation.domain.ReservationManager;
+import io.pivotal.pal.data.rentaltrucks.reservation.domain.ReservationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -12,15 +12,15 @@ public class FinalizeConfirmationEventHandler implements AsyncEventHandler<Truck
 
     private static final Logger logger = LoggerFactory.getLogger(FinalizeConfirmationEventHandler.class);
 
-    private final ReservationManager reservationManager;
+    private final ReservationService reservationService;
 
-    public FinalizeConfirmationEventHandler(ReservationManager reservationManager) {
-        this.reservationManager = reservationManager;
+    public FinalizeConfirmationEventHandler(ReservationService reservationService) {
+        this.reservationService = reservationService;
     }
 
     @Override
     public void onEvent(TruckAvailableEvent data) {
-        reservationManager.finalizeReservation(data.getConfirmationNumber());
+        reservationService.finalizeReservation(data.getConfirmationNumber());
 
         // send an email
     }

@@ -3,24 +3,24 @@ package io.pivotal.pal.data.rentaltrucks.reservation.command;
 import io.pivotal.pal.data.framework.event.AsyncEventPublisher;
 import io.pivotal.pal.data.rentaltrucks.event.TruckDroppedOffEvent;
 import io.pivotal.pal.data.rentaltrucks.reservation.domain.Rental;
-import io.pivotal.pal.data.rentaltrucks.reservation.domain.RentalManager;
+import io.pivotal.pal.data.rentaltrucks.reservation.domain.RentalService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DropOffRentalCommandHandler {
 
-    private final RentalManager rentalManager;
+    private final RentalService rentalService;
     private final AsyncEventPublisher<TruckDroppedOffEvent> eventPublisher;
 
-    public DropOffRentalCommandHandler(RentalManager rentalManager,
+    public DropOffRentalCommandHandler(RentalService rentalService,
                                        AsyncEventPublisher<TruckDroppedOffEvent> eventPublisher) {
-        this.rentalManager = rentalManager;
+        this.rentalService = rentalService;
         this.eventPublisher = eventPublisher;
     }
 
     public void dropOffRental(DropOffRentalCommandDto commandDto) {
         // find truck vin by looking up rental
-        Rental rental = rentalManager.findByConfirmationNumber(commandDto.getConfirmationNumber());
+        Rental rental = rentalService.findByConfirmationNumber(commandDto.getConfirmationNumber());
 
         // emit truck dropped off event
         TruckDroppedOffEvent event =

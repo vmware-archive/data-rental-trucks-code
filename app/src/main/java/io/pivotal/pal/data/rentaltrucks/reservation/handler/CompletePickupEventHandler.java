@@ -8,16 +8,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class CompletePickupEventHandler implements AsyncEventHandler<TruckPickedUpEvent> {
 
-    private final ReservationManager reservationManager;
-    private final RentalManager rentalManager;
-    private final TruckManager truckManager;
+    private final ReservationService reservationService;
+    private final RentalService rentalService;
+    private final TruckService truckService;
 
-    public CompletePickupEventHandler(ReservationManager reservationManager,
-                                      RentalManager rentalManager,
-                                      TruckManager truckManager) {
-        this.reservationManager = reservationManager;
-        this.rentalManager = rentalManager;
-        this.truckManager = truckManager;
+    public CompletePickupEventHandler(ReservationService reservationService,
+                                      RentalService rentalService,
+                                      TruckService truckService) {
+        this.reservationService = reservationService;
+        this.rentalService = rentalService;
+        this.truckService = truckService;
     }
 
     @Override
@@ -25,12 +25,12 @@ public class CompletePickupEventHandler implements AsyncEventHandler<TruckPicked
         // TODO: revisit consistency between the following operations
 
         // update truck to RENTED status
-        Truck truck = truckManager.withdrawTruckFromYard(data.getTruckVin());
+        Truck truck = truckService.withdrawTruckFromYard(data.getTruckVin());
 
         // update reservation to COMPLETED status
-        Reservation reservation = reservationManager.complete(data.getConfirmationNumber());
+        Reservation reservation = reservationService.complete(data.getConfirmationNumber());
 
         // create rental in PICKED_UP status
-        rentalManager.pickupReservedTruck(reservation, truck);
+        rentalService.pickupReservedTruck(reservation, truck);
     }
 }

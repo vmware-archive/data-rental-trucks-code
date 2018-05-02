@@ -1,21 +1,21 @@
 package io.pivotal.pal.data.rentaltrucks.reservation.query;
 
 import io.pivotal.pal.data.rentaltrucks.reservation.domain.Truck;
-import io.pivotal.pal.data.rentaltrucks.reservation.domain.TruckManager;
+import io.pivotal.pal.data.rentaltrucks.reservation.domain.TruckService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AvailableTruckQueryController {
 
-    private final TruckManager truckManager;
+    private final TruckService truckService;
 
-    public AvailableTruckQueryController(TruckManager truckManager) {
-        this.truckManager = truckManager;
+    public AvailableTruckQueryController(TruckService truckService) {
+        this.truckService = truckService;
     }
 
     @GetMapping("/available-trucks")
     public Iterable<Truck> listTrucks() {
-        return truckManager.listAvailableTrucks();
+        return truckService.listAvailableTrucks();
     }
 }
