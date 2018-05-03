@@ -1,5 +1,6 @@
 package io.pivotal.pal.data.rentaltrucks.fleet.command;
 
+import io.pivotal.pal.data.framework.event.SyncEventHandler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,9 +14,9 @@ import java.util.Map;
 @RestController
 public class TruckEntersMaintenanceCommandController {
 
-    private final TruckEntersMaintenanceCommandHandler commandHandler;
+    private final SyncEventHandler<TruckEntersMaintenanceCommandDto, Void> commandHandler;
 
-    public TruckEntersMaintenanceCommandController(TruckEntersMaintenanceCommandHandler commandHandler) {
+    public TruckEntersMaintenanceCommandController(SyncEventHandler<TruckEntersMaintenanceCommandDto, Void> commandHandler) {
         this.commandHandler = commandHandler;
     }
 
@@ -23,7 +24,7 @@ public class TruckEntersMaintenanceCommandController {
     public ResponseEntity<Void> entersTruckToMaintenance(@RequestBody TruckEntersMaintenanceCommandDto commandDto,
                                                          UriComponentsBuilder uriComponentsBuilder) {
 
-        commandHandler.enterTheTruck(commandDto);
+        commandHandler.onEvent(commandDto);
 
         Map<String, String> uriVariables = new HashMap<>();
         uriVariables.put("truckVin", commandDto.getTruckVin());

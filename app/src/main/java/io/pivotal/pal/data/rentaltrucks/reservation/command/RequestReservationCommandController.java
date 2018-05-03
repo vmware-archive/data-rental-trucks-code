@@ -1,5 +1,6 @@
 package io.pivotal.pal.data.rentaltrucks.reservation.command;
 
+import io.pivotal.pal.data.framework.event.SyncEventHandler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,9 +14,9 @@ import java.util.Map;
 @RestController
 public class RequestReservationCommandController {
 
-    private final RequestReservationCommandHandler commandHandler;
+    private final SyncEventHandler<RequestReservationCommandDto, String> commandHandler;
 
-    public RequestReservationCommandController(RequestReservationCommandHandler commandHandler) {
+    public RequestReservationCommandController(SyncEventHandler<RequestReservationCommandDto, String> commandHandler) {
         this.commandHandler = commandHandler;
     }
 
@@ -23,7 +24,7 @@ public class RequestReservationCommandController {
     public ResponseEntity<Void> rentTruck(@RequestBody RequestReservationCommandDto commandDto,
                                           UriComponentsBuilder uriComponentsBuilder) {
 
-        String confirmationNumber = commandHandler.rentTruck(commandDto);
+        String confirmationNumber = commandHandler.onEvent(commandDto);
 
         Map<String, String> uriVariables = new HashMap<>();
         uriVariables.put("confirmationNumber", confirmationNumber);
