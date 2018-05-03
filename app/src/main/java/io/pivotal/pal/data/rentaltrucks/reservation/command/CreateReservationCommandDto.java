@@ -5,16 +5,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
-public class RequestReservationCommandDto {
+public class CreateReservationCommandDto {
 
     private final String pickupDate;
     private final String dropoffDate;
     private final String customerName;
 
     @JsonCreator
-    public RequestReservationCommandDto(@JsonProperty("pickupDate") String pickupDate,
-                                        @JsonProperty("dropoffDate") String dropoffDate,
-                                        @JsonProperty("customerName") String customerName) {
+    public CreateReservationCommandDto(@JsonProperty("pickupDate") String pickupDate,
+                                       @JsonProperty("dropoffDate") String dropoffDate,
+                                       @JsonProperty("customerName") String customerName) {
         this.pickupDate = pickupDate;
         this.dropoffDate = dropoffDate;
         this.customerName = customerName;
@@ -36,7 +36,7 @@ public class RequestReservationCommandDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RequestReservationCommandDto that = (RequestReservationCommandDto) o;
+        CreateReservationCommandDto that = (CreateReservationCommandDto) o;
         return Objects.equals(pickupDate, that.pickupDate) &&
                 Objects.equals(dropoffDate, that.dropoffDate) &&
                 Objects.equals(customerName, that.customerName);
@@ -49,7 +49,7 @@ public class RequestReservationCommandDto {
 
     @Override
     public String toString() {
-        return "RequestReservationCommandDto{" +
+        return "CreateReservationCommandDto{" +
                 "pickupDate='" + pickupDate + '\'' +
                 ", dropoffDate='" + dropoffDate + '\'' +
                 ", customerName='" + customerName + '\'' +

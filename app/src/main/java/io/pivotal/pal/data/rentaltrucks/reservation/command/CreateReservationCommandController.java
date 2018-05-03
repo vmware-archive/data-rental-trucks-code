@@ -12,17 +12,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-public class RequestReservationCommandController {
+public class CreateReservationCommandController {
 
-    private final SyncEventHandler<RequestReservationCommandDto, String> commandHandler;
+    private final SyncEventHandler<CreateReservationCommandDto, String> commandHandler;
 
-    public RequestReservationCommandController(SyncEventHandler<RequestReservationCommandDto, String> commandHandler) {
+    public CreateReservationCommandController(SyncEventHandler<CreateReservationCommandDto, String> commandHandler) {
         this.commandHandler = commandHandler;
     }
 
-    @PostMapping("/reservations-requests")
-    public ResponseEntity<Void> rentTruck(@RequestBody RequestReservationCommandDto commandDto,
-                                          UriComponentsBuilder uriComponentsBuilder) {
+    @PostMapping("/reservations")
+    public ResponseEntity<Void> createReservation(@RequestBody CreateReservationCommandDto commandDto,
+                                                  UriComponentsBuilder uriComponentsBuilder) {
 
         String confirmationNumber = commandHandler.onEvent(commandDto);
 

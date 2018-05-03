@@ -1,5 +1,9 @@
 package io.pivotal.pal.data.rentaltrucks.reservation.domain;
 
+import io.pivotal.pal.data.framework.event.AsyncEventHandler;
+import org.springframework.context.event.EventListener;
+import org.springframework.data.domain.AbstractAggregateRoot;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,7 +13,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "reservation", schema = "reservation")
-public class Reservation {
+public class Reservation extends AbstractAggregateRoot {
 
     @Id
     @Column(name = "confirmation_number")
@@ -27,16 +31,28 @@ public class Reservation {
     @Column(name = "customer_name")
     private String customerName;
 
-    public Reservation(String confirmationNumber, String status, LocalDate startDate, LocalDate endDate, String customerName) {
+    // TODO: lower the scope on this
+    Reservation(String confirmationNumber, String status, LocalDate startDate, LocalDate endDate, String customerName) {
         this.confirmationNumber = confirmationNumber;
         this.status = status;
         this.startDate = startDate;
         this.endDate = endDate;
         this.customerName = customerName;
+
+        registerEvent(ReservationCreatedDomainEvent.of(this));
     }
 
     Reservation() {
         // default constructor
+    }
+
+    public static Reservation create(LocalDate startDate, LocalDate endDate, String customerName, String confirmationNumber) {
+//        Reservation reservation = new Reservation(confirmationNumber, "CREATED", startDate, endDate, customerName);
+        Reservation reservation = new Reservation();
+
+        reservation.handleEvent(ReservationCreatedDomainEvent.of(reservation)); // FIXME
+
+        return reservation;
     }
 
     ////////////////////////
@@ -63,6 +79,19 @@ public class Reservation {
 
     public String getCustomerName() {
         return customerName;
+    }
+
+    ////////////////////////
+
+    @EventListener
+    private void handleEvent(ReservationCreatedDomainEvent event) {
+        this.confirmationNumber = event.getReservation().getConfirmationNumber();
+        this.status = event.getReservation().getStatus();
+        this.startDate = event.getReservation().getStartDate();
+        this.endDate = event.getReservation().getEndDate();
+        this.customerName = event.getReservation().getCustomerName();
+
+        this.status = "CREATED";
     }
 
     ////////////////////////
@@ -116,5 +145,24 @@ public class Reservation {
                 ", endDate=" + endDate +
                 ", customerName='" + customerName + '\'' +
                 '}';
+    }
+
+    public static class ReservationCreatedDomainEvent {
+
+        private final Reservation reservation;
+
+        private ReservationCreatedDomainEvent(Reservation reservation) {
+            this.reservation = reservation;
+        }
+
+        public static ReservationCreatedDomainEvent of(Reservation reservation) {
+            return new ReservationCreatedDomainEvent(reservation);
+        }
+
+        public Reservation getReservation() {
+            return reservation;
+        }
+
+        // TODO: more boilerplate
     }
 }

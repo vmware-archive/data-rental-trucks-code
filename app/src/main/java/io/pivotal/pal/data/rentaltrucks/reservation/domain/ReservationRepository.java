@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.time.LocalDate;
 import java.util.Collection;
 
-interface ReservationRepository extends CrudRepository<Reservation, String> {
+public interface ReservationRepository extends CrudRepository<Reservation, String> {
 
     Collection<Reservation> findAllByStartDateBeforeAndEndDateAfter(LocalDate startDate, LocalDate endDate);
 
