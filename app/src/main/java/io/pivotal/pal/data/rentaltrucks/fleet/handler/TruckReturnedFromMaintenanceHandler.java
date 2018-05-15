@@ -15,7 +15,7 @@ public class TruckReturnedFromMaintenanceHandler implements AsyncEventHandler<Tr
     }
 
     @Override
-    public void onEvent(TruckReturnedFromMaintenanceEvent data) {
-        truckService.returnTruckFromMaintenance(data.getTruckVin(), data.getEndDate());
+    public void onEvent(TruckReturnedFromMaintenanceEvent event) {
+        truckService.returnTruckFromMaintenance(event.getTruckVin(), event.getEndDate());
     }
 }

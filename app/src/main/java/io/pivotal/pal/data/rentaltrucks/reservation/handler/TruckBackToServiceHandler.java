@@ -15,9 +15,9 @@ public class TruckBackToServiceHandler implements AsyncEventHandler<TruckReturne
     }
 
     @Override
-    public void onEvent(TruckReturnedFromMaintenanceEvent data) {
+    public void onEvent(TruckReturnedFromMaintenanceEvent event) {
 
         // update the truck status to AVAILABLE
-        truckService.returnTruckToYardFromMaintenance(data.getTruckVin());
+        truckService.returnTruckToYardFromMaintenance(event.getTruckVin());
     }
 }

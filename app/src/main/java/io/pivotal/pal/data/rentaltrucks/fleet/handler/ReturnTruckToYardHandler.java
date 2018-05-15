@@ -15,9 +15,9 @@ public class ReturnTruckToYardHandler implements AsyncEventHandler<TruckDroppedO
     }
 
     @Override
-    public void onEvent(TruckDroppedOffEvent data) {
+    public void onEvent(TruckDroppedOffEvent event) {
 
         // update status and mileage
-        truckService.returnTruckToYard(data.getTruckVin(), data.getDropOffMileage());
+        truckService.returnTruckToYard(event.getTruckVin(), event.getDropOffMileage());
     }
 }

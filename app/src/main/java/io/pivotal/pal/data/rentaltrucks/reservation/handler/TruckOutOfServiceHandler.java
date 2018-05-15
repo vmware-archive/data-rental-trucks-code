@@ -15,9 +15,9 @@ public class TruckOutOfServiceHandler implements AsyncEventHandler<TruckEnteredM
     }
 
     @Override
-    public void onEvent(TruckEnteredMaintenanceEvent data) {
+    public void onEvent(TruckEnteredMaintenanceEvent event) {
 
         // update the truck status to OUT_OF_SERVICE
-        truckService.withdrawTruckFromYardToSendToMaintenance(data.getTruckVin());
+        truckService.withdrawTruckFromYardToSendToMaintenance(event.getTruckVin());
     }
 }

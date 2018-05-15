@@ -25,17 +25,17 @@ public class CompleteDropOffEventHandler implements AsyncEventHandler<TruckDropp
     }
 
     @Override
-    public void onEvent(TruckDroppedOffEvent data) {
-        logger.info("completing dropoff for event={}", data);
+    public void onEvent(TruckDroppedOffEvent event) {
+        logger.info("completing dropoff for event={}", event);
 
         // TODO: revisit consistency between the following operations
 
         // update rental to RETURNED, record the dropOffMileage
-        Rental rental = rentalService.dropoffRental(data.getConfirmationNumber(), data.getDropOffMileage());
+        Rental rental = rentalService.dropoffRental(event.getConfirmationNumber(), event.getDropOffMileage());
         logger.info("saved updated rental={}", rental);
 
         // update truck status to AVAILABLE, mileage to dropOffMileage
-        Truck truck = truckService.returnTruckToYard(rental.getTruckVin(), data.getDropOffMileage());
+        Truck truck = truckService.returnTruckToYard(rental.getTruckVin(), event.getDropOffMileage());
         logger.info("saved updated truck={}", truck);
     }
 }

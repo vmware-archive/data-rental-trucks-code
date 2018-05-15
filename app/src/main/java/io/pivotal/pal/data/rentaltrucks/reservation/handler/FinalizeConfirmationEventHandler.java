@@ -19,8 +19,8 @@ public class FinalizeConfirmationEventHandler implements AsyncEventHandler<Truck
     }
 
     @Override
-    public void onEvent(TruckAvailableEvent data) {
-        reservationService.finalizeReservation(data.getConfirmationNumber());
+    public void onEvent(TruckAvailableEvent event) {
+        reservationService.finalizeReservation(event.getConfirmationNumber());
 
         // send an email
     }

@@ -16,13 +16,13 @@ public class SaveReservationEventHandler implements AsyncEventHandler<Reservatio
     }
 
     @Override
-    public void onEvent(ReservationRequestedEvent data) {
+    public void onEvent(ReservationRequestedEvent event) {
 
         ReservationRequest reservationRequest = new ReservationRequest(
-                data.getPickupDate(),
-                data.getDropoffDate(),
-                data.getCustomerName(),
-                data.getConfirmationNumber()
+                event.getPickupDate(),
+                event.getDropoffDate(),
+                event.getCustomerName(),
+                event.getConfirmationNumber()
         );
 
         reservationService.createReservation(reservationRequest);

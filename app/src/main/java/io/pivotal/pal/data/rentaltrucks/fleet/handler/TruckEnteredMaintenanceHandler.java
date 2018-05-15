@@ -15,7 +15,7 @@ public class TruckEnteredMaintenanceHandler implements AsyncEventHandler<TruckEn
     }
 
     @Override
-    public void onEvent(TruckEnteredMaintenanceEvent data) {
-        truckService.moveTruckToMaintenance(data.getTruckVin(), data.getStartDate());
+    public void onEvent(TruckEnteredMaintenanceEvent event) {
+        truckService.moveTruckToMaintenance(event.getTruckVin(), event.getStartDate());
     }
 }

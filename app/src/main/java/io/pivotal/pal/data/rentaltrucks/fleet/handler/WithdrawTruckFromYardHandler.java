@@ -15,7 +15,7 @@ public class WithdrawTruckFromYardHandler implements AsyncEventHandler<TruckPick
     }
 
     @Override
-    public void onEvent(TruckPickedUpEvent data) {
-        truckService.withdrawTruckFromyard(data.getTruckVin());
+    public void onEvent(TruckPickedUpEvent event) {
+        truckService.withdrawTruckFromyard(event.getTruckVin());
     }
 }
